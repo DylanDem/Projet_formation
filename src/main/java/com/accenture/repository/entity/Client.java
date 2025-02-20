@@ -4,6 +4,7 @@ package com.accenture.repository.entity;
 import com.accenture.model.Licences;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,8 +31,8 @@ public class Client extends ConnectedUser {
 
     private LocalDate registrationDate = LocalDate.now();
 
-    @ElementCollection
-    private Licences licence;
+    @Enumerated
+    private List<Licences> licencesList;
 
     private String inactive = "N"; // O > active, N > inactive
 

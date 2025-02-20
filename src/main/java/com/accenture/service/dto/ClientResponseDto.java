@@ -15,6 +15,7 @@ public record ClientResponseDto(
         String email,
         LocalDate birthDate,
         LocalDate registrationDate,
-        Licences licence,
+        List<Licences> licencesList,
         String inactive  // "O" active, "N" inactive
-) {}
+) {
+}

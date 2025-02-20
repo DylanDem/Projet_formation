@@ -6,6 +6,7 @@ import jakarta.persistence.Column;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.List;
 
 
 public record ClientRequestDto(
@@ -30,7 +31,8 @@ public record ClientRequestDto(
 
         @NotNull(message = "Birth date is mandatory.")
         @Past(message = "User HAS to be over 18 years old.") LocalDate birthDate,
-        Licences licence
+
+        List<Licences> licencesList
 ) {
 }
 
