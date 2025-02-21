@@ -17,7 +17,7 @@ public record ClientRequestDto(
         String firstName,
 
         @NotBlank(message = "Address is mandatory")
-        Address address,
+        AddressDto address,
 
         @NotBlank(message = "Email is mandatory")
         @Email(message = "Email HAS to be valid")
@@ -30,9 +30,12 @@ public record ClientRequestDto(
         String password,
 
         @NotNull(message = "Birth date is mandatory.")
-        @Past(message = "User HAS to be over 18 years old.") LocalDate birthDate,
+        @Past(message = "User HAS to be over 18 years old.")
+        LocalDate birthDate,
 
         List<Licences> licencesList
+
+
 ) {
 }
 

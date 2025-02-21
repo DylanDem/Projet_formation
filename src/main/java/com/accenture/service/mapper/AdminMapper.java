@@ -2,6 +2,7 @@ package com.accenture.service.mapper;
 
 import com.accenture.repository.entity.Admin;
 import com.accenture.service.dto.AdminRequestDto;
+import com.accenture.service.dto.AdminResponseDto;
 import com.accenture.service.dto.ClientRequestDto;
 import com.accenture.service.dto.ClientResponseDto;
 import org.mapstruct.Mapper;
@@ -10,5 +11,5 @@ import org.mapstruct.Mapper;
 public interface AdminMapper {
 
     Admin toAdmin(AdminRequestDto adminRequestDto);
-    ClientRequestDto toAdminResponseDto (Admin admin);
+    AdminResponseDto toAdminResponseDto (Admin admin);
 }

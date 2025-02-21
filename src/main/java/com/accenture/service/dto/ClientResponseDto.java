@@ -8,7 +8,7 @@ import java.util.List;
 
 public record ClientResponseDto(
 
-        Long id,
+
         String name,
         String firstName,
         Address address,

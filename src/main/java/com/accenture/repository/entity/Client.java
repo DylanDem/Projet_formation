@@ -2,9 +2,7 @@ package com.accenture.repository.entity;
 
 
 import com.accenture.model.Licences;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,9 +17,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@DiscriminatorValue("Client")
 public class Client extends ConnectedUser {
 
-
+    @OneToOne(cascade = CascadeType.ALL)
     @NotBlank(message = "adresse is mandatory")
     private Address address;
 
@@ -31,7 +30,7 @@ public class Client extends ConnectedUser {
 
     private LocalDate registrationDate = LocalDate.now();
 
-    @Enumerated
+    @ElementCollection
     private List<Licences> licencesList;
 
     private String inactive = "N"; // O > active, N > inactive
