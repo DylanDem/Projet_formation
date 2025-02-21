@@ -45,7 +45,7 @@ public class ClientServiceImpl implements ClientService {
             throw new ClientException("Client's password is absent");
         if (clientRequestDto.address().town() == null)
             throw new ClientException("Client's address is absent");
-        if (clientRequestDto.address().street() == 0)
+        if (clientRequestDto.address().street() == null)
             throw new ClientException("Client's address is absent");
         if (clientRequestDto.address().postalCode() == null)
             throw new ClientException("Client's address is absent");
@@ -143,20 +143,21 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<ClientResponseDto> search(String email, String firstName, String name, LocalDate birthDate, int street, String postalCode, String town, String inactive, List<Licences> licencesList, LocalDate registrationDate) {
+    public List<ClientResponseDto> search(String email, String firstName, String name, LocalDate birthDate, String street, String postalCode, String town, String inactive, List<Licences> licencesList, LocalDate registrationDate) {
         List<Client> list = null;
         if (email != null) list = clientDao.findByEmailContaining(email);
         else if (firstName != null) list = clientDao.findByFirstNameContaining(firstName);
         else if (name != null) list = clientDao.findByNameContaining(name);
         else if (birthDate != null) list = clientDao.findByBirthDate(birthDate);
-        else if (street != 0) list = clientDao.findByAddress_StreetContaining(street);
+        else if (street != null) list = clientDao.findByAddress_StreetContaining(street);
         else if (postalCode != null) list = clientDao.findByAddress_PostalCodeContaining(postalCode);
         else if (town != null) list = clientDao.findByAddress_TownContaining(town);
         else if (inactive != null) list = clientDao.findByInactive(inactive);
         else if (registrationDate != null) list = clientDao.findByRegistrationDate(registrationDate);
         else if (licencesList != null && !licencesList.isEmpty()) {
-            Licences permis = licencesList.get(0);
-            list = clientDao.findByLicencesContaining(permis);
+            Licences licences = licencesList.get(0);
+            list = clientDao.findByLicencesListContaining(licences);
+
         }
         if (list == null) throw new ClientException("Please enter something valid !");
         return list.stream().map(clientMapper::toClientResponseDto).toList();

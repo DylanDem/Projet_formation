@@ -20,7 +20,7 @@ public interface ClientDao extends JpaRepository<Client, String> {
 
     List<Client> findByBirthDate(LocalDate birthDate);
 
-    List<Client> findByAddress_StreetContaining(int street);
+    List<Client> findByAddress_StreetContaining(String street);
 
     List<Client> findByAddress_PostalCodeContaining(String postalCode);
 
@@ -30,5 +30,5 @@ public interface ClientDao extends JpaRepository<Client, String> {
 
     List<Client> findByRegistrationDate(LocalDate registrationDate);
 
-    List<Client> findByLicencesContaining(Licences permis);
+    List<Client> findByLicencesListContaining(Licences licences);
 }

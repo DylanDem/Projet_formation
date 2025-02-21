@@ -25,5 +25,5 @@ public interface ClientService {
 
     void delete(String email) throws ClientException;
 
-    List<ClientResponseDto> search(String email, String firstName, String name, LocalDate birthDate, int street, String postalCode, String town, String inactive, List<Licences> licencesList, LocalDate registrationDate);
+    List<ClientResponseDto> search(String email, String firstName, String name, LocalDate birthDate, String street, String postalCode, String town, String inactive, List<Licences> licencesList, LocalDate registrationDate);
 }

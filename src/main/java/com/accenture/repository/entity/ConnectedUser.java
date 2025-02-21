@@ -17,9 +17,9 @@ import javax.validation.constraints.Size;
 public class ConnectedUser {
 
     @Id
+    private String email;
     private String name;
     private String firstName;
-    private String email;
     private String password;
 
 
