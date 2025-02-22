@@ -26,7 +26,7 @@ public interface ClientDao extends JpaRepository<Client, String> {
 
     List<Client> findByAddress_TownContaining(String town);
 
-    List<Client> findByInactive(String inactive);
+    List<Client> findByInactive(boolean inactive);
 
     List<Client> findByRegistrationDate(LocalDate registrationDate);
 

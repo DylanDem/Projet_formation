@@ -29,8 +29,7 @@ public class ClientServiceImpl implements ClientService {
         this.clientMapper = clientMapper;
     }
 
-
-    private static void clientVerify(ClientRequestDto clientRequestDto) throws ClientException {
+        private static void clientVerify(ClientRequestDto clientRequestDto) throws ClientException {
         if (clientRequestDto == null)
             throw new ClientException("ClientRequestDto is null");
         if (clientRequestDto.name() == null || clientRequestDto.name().isBlank())
@@ -49,7 +48,7 @@ public class ClientServiceImpl implements ClientService {
             throw new ClientException("Client's address is absent");
         if (clientRequestDto.address().postalCode() == null)
             throw new ClientException("Client's address is absent");
-        if (LocalDate.now().minus(Period.between(clientRequestDto.birthDate(), LocalDate.now())).getYear() < 18)
+        if (Period.between(clientRequestDto.birthDate(), LocalDate.now()).getYears() < 18)
             throw new ClientException("Client MUST be over 18 years old");
 
 
@@ -143,7 +142,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<ClientResponseDto> search(String email, String firstName, String name, LocalDate birthDate, String street, String postalCode, String town, String inactive, List<Licences> licencesList, LocalDate registrationDate) {
+    public List<ClientResponseDto> search(String email, String firstName, String name, LocalDate birthDate, String street, String postalCode, String town, boolean inactive, List<Licences> licencesList, LocalDate registrationDate) {
         List<Client> list = null;
         if (email != null) list = clientDao.findByEmailContaining(email);
         else if (firstName != null) list = clientDao.findByFirstNameContaining(firstName);
@@ -152,7 +151,7 @@ public class ClientServiceImpl implements ClientService {
         else if (street != null) list = clientDao.findByAddress_StreetContaining(street);
         else if (postalCode != null) list = clientDao.findByAddress_PostalCodeContaining(postalCode);
         else if (town != null) list = clientDao.findByAddress_TownContaining(town);
-        else if (inactive != null) list = clientDao.findByInactive(inactive);
+        else if (inactive != false) list = clientDao.findByInactive(inactive);
         else if (registrationDate != null) list = clientDao.findByRegistrationDate(registrationDate);
         else if (licencesList != null && !licencesList.isEmpty()) {
             Licences licences = licencesList.get(0);

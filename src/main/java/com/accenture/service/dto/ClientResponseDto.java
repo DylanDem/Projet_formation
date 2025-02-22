@@ -16,6 +16,6 @@ public record ClientResponseDto(
         LocalDate birthDate,
         LocalDate registrationDate,
         List<Licences> licencesList,
-        String inactive  // "O" active, "N" inactive
+        boolean inactive  // "O" active, "N" inactive
 ) {
 }

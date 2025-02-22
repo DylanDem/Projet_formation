@@ -33,7 +33,7 @@ public class Client extends ConnectedUser {
     @ElementCollection
     private List<Licences> licencesList;
 
-    private String inactive = "N"; // O > active, N > inactive
+    private boolean inactive;
 
 
 }
