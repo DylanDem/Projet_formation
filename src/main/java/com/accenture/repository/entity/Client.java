@@ -35,5 +35,4 @@ public class Client extends ConnectedUser {
 
     private boolean inactive;
 
-
 }
