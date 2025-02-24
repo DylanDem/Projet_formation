@@ -1,5 +1,6 @@
 package com.accenture.controller;
 
+import com.accenture.repository.entity.Client;
 import com.accenture.service.ClientService;
 import com.accenture.service.dto.ClientRequestDto;
 import com.accenture.service.dto.ClientResponseDto;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/clients")
@@ -23,9 +25,15 @@ public class ClientController {
     }
 
     @GetMapping
-    List<ClientResponseDto> clients(String email, String password) {
-        return clientService.toFindAll(email, password);
+    List<ClientResponseDto> clients() {
+        return clientService.toFindAll();
     }
+
+    @GetMapping("/myaccount")
+    ClientResponseDto optClient(String email, String password) {
+        return clientService.getInfos(email, password);
+    }
+
 
     @DeleteMapping()
     ResponseEntity<Void> del(String email, String password) {

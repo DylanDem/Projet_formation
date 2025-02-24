@@ -12,15 +12,19 @@ import javax.validation.constraints.Size;
 
 @Data
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConnectedUser {
+public abstract class ConnectedUser {
 
     @Id
     private String email;
     private String name;
     private String firstName;
     private String password;
+
+
+
 
 
 }

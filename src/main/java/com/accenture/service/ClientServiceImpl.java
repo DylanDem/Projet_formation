@@ -81,19 +81,34 @@ public class ClientServiceImpl implements ClientService {
 
 
     @Override
-    public List<ClientResponseDto> toFindAll(String email, String password) {
+    public List<ClientResponseDto> toFindAll() {
+        //TODO : make sure email and PW are equals to what's been registered by the client
+
         return clientDao.findAll().stream()
                 .map(clientMapper::toClientResponseDto)
                 .toList();
     }
 
+    public ClientResponseDto getInfos (String email, String password) {
+
+
+        Optional<Client> optClient = clientDao.findByEmail(email);
+        Client client = optClient.orElseThrow(() -> new EntityNotFoundException("email not found"));
+
+        if (password != null && !password.equals(client.getPassword()))
+            throw new EntityNotFoundException("password not found");
+
+
+        return clientMapper.toClientResponseDto(client);
+
+
+    }
 
     @Override
     public ClientResponseDto toAdd(ClientRequestDto clientRequestDto) throws ClientException {
         clientVerify(clientRequestDto);
         Client client = clientMapper.toClient(clientRequestDto);
         Client backedClient = clientDao.save(client);
-
 
         return clientMapper.toClientResponseDto(backedClient);
 

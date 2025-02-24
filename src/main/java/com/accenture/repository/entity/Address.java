@@ -21,4 +21,10 @@ public class Address {
     private String street;
     private String postalCode;
     private String town;
+
+    public Address(String street, String postalCode, String town) {
+        this.street = street;
+        this.postalCode = postalCode;
+        this.town = town;
+    }
 }

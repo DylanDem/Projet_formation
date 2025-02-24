@@ -12,7 +12,7 @@ import java.util.List;
 public interface ClientService {
     ClientResponseDto toFind(String email) throws EntityNotFoundException;
 
-    List<ClientResponseDto> toFindAll(String email, String password);
+    List<ClientResponseDto> toFindAll();
 
     ClientResponseDto toAdd(ClientRequestDto clientRequestDto) throws ClientException;
 
@@ -25,4 +25,6 @@ public interface ClientService {
     void delete(String email, String password) throws ClientException;
 
     List<ClientResponseDto> search(String email, String firstName, String name, LocalDate birthDate, String street, String postalCode, String town, boolean inactive, List<Licences> licencesList, LocalDate registrationDate);
+
+    ClientResponseDto getInfos (String email, String password);
 }
