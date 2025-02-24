@@ -20,6 +20,7 @@ import java.util.Optional;
 public class ClientServiceImpl implements ClientService {
 
     private static final String NULLABLE_ID = "Non present ID";
+    private static final String REGEX_PW = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[&#@-_§])[A-Za-z\\d&%$_]{8,16}$";
     @Autowired
     private final ClientDao clientDao;
     private final ClientMapper clientMapper;
@@ -29,7 +30,7 @@ public class ClientServiceImpl implements ClientService {
         this.clientMapper = clientMapper;
     }
 
-        private static void clientVerify(ClientRequestDto clientRequestDto) throws ClientException {
+    private static void clientVerify(ClientRequestDto clientRequestDto) throws ClientException {
         if (clientRequestDto == null)
             throw new ClientException("ClientRequestDto is null");
         if (clientRequestDto.name() == null || clientRequestDto.name().isBlank())
@@ -40,8 +41,8 @@ public class ClientServiceImpl implements ClientService {
             throw new ClientException("Client's email is absent");
         if (clientRequestDto.birthDate() == null)
             throw new ClientException("Client's birth date is absent");
-        if (clientRequestDto.password() == null)
-            throw new ClientException("Client's password is absent");
+        if (!clientRequestDto.password().matches(REGEX_PW))
+            throw new ClientException("Client's password is not valid");
         if (clientRequestDto.address().town() == null)
             throw new ClientException("Client's address is absent");
         if (clientRequestDto.address().street() == null)
@@ -80,7 +81,7 @@ public class ClientServiceImpl implements ClientService {
 
 
     @Override
-    public List<ClientResponseDto> toFindAll() {
+    public List<ClientResponseDto> toFindAll(String email, String password) {
         return clientDao.findAll().stream()
                 .map(clientMapper::toClientResponseDto)
                 .toList();
@@ -105,7 +106,7 @@ public class ClientServiceImpl implements ClientService {
 
 
     @Override
-    public ClientResponseDto toUpdate(String email, ClientRequestDto clientRequestDto) throws ClientException, EntityNotFoundException {
+    public ClientResponseDto toUpdate(String email, String password, ClientRequestDto clientRequestDto) throws ClientException, EntityNotFoundException {
         if (!clientDao.existsById(email))
             throw new EntityNotFoundException(NULLABLE_ID);
 
@@ -135,7 +136,7 @@ public class ClientServiceImpl implements ClientService {
 
 
     @Override
-    public void delete(String email) throws EntityNotFoundException {
+    public void delete(String email, String password) throws EntityNotFoundException {
         if (clientDao.existsById(email))
             clientDao.deleteById(email);
 

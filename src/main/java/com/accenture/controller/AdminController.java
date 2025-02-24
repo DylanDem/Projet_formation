@@ -3,8 +3,6 @@ package com.accenture.controller;
 import com.accenture.service.AdminService;
 import com.accenture.service.dto.AdminRequestDto;
 import com.accenture.service.dto.AdminResponseDto;
-import com.accenture.service.dto.ClientRequestDto;
-import com.accenture.service.dto.ClientResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,41 +22,41 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-//    @GetMapping
-//    List<AdminResponseDto> admins() {
-//        return adminService.toFindAll();
-//    }
-//
-//    @GetMapping("{id}")
-//    ResponseEntity<Void> del(@PathVariable("id") String email) {
-//        adminService.delete(email);
-//        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-//    }
-//
-//    @PostMapping
-//    ResponseEntity<Void> add(@RequestBody @Valid AdminRequestDto adminRequestDto) {
-//        AdminResponseDto registrdAdmin = adminService.toAdd(adminRequestDto);
-//        URI location = ServletUriComponentsBuilder
-//                .fromCurrentRequest()
-//                .path("/{id}")
-//                .buildAndExpand(registrdAdmin.email())
-//                .toUri();
-//
-//        return ResponseEntity.created(location).build();
-//    }
-//
-//    @PutMapping("/{id}")
-//    ResponseEntity<AdminResponseDto> update(@PathVariable("id") String email, @RequestBody @Valid AdminRequestDto adminRequestDto) {
-//        AdminResponseDto answer = adminService.toUpdate(email, adminRequestDto);
-//        return ResponseEntity.ok(answer);
-//    }
-//
-//    @PatchMapping("/{id}")
-//    ResponseEntity<AdminResponseDto> partiallyUpdate(@PathVariable("id") String email, @RequestBody AdminRequestDto adminRequestDto) {
-//        AdminResponseDto answer = adminService.toUpdate(email, adminRequestDto);
-//        return ResponseEntity.ok(answer);
-//
-//    }
-//TODO: DECOMMENT THIS
+    @GetMapping
+    List<AdminResponseDto> admins(String email, String password) {
+        return adminService.toFindAll(email, password);
+    }
+
+    @DeleteMapping
+    ResponseEntity<Void> del( String email, String password) {
+        adminService.deleteAdmin(email, password);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @PostMapping
+    ResponseEntity<Void> add(@RequestBody @Valid AdminRequestDto adminRequestDto) {
+        AdminResponseDto registrdAdmin = adminService.toAddMin(adminRequestDto);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(registrdAdmin.email())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @PutMapping("/{id}")
+    ResponseEntity<AdminResponseDto> update(@PathVariable("id") String email, String password, @RequestBody @Valid AdminRequestDto adminRequestDto) {
+        AdminResponseDto answer = adminService.toUpdateAdmin(email, password, adminRequestDto);
+        return ResponseEntity.ok(answer);
+    }
+
+    @PatchMapping
+    ResponseEntity<AdminResponseDto> partiallyUpdate(String email, String password, @RequestBody AdminRequestDto adminRequestDto) {
+        AdminResponseDto answer = adminService.toUpdateAdmin(email, password, adminRequestDto);
+        return ResponseEntity.ok(answer);
+
+    }
+
 
     }

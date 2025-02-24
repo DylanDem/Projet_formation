@@ -22,7 +22,10 @@ public record AdminRequestDto(
 
         @NotBlank(message = "Password is mandatory")
         @Size(min = 8, max = 16, message = "Password has to contain between 8 and 16 units.")
-        @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[&#@-_§]).{8,16}$", message = "Passwords needs to contain atleast one of the following elements : Uppercase. Lowercase. One Digit and one special case such as : & # @ - _ §.")
-        String password
-        ) {
+        @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[&#@-_§])[A-Za-z\\d&%$_]{8,16}$", message = "Passwords needs to contain atleast one of the following elements : Uppercase. Lowercase. One Digit and one special case such as : & # @ - _ §.")
+        String password,
+
+        @NotBlank(message = "Function is mandatory")
+        String function
+) {
 }

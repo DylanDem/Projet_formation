@@ -1,12 +1,8 @@
 package com.accenture.controller;
 
-import com.accenture.model.Licences;
-import com.accenture.repository.ClientDao;
-import com.accenture.repository.entity.Client;
 import com.accenture.service.ClientService;
 import com.accenture.service.dto.ClientRequestDto;
 import com.accenture.service.dto.ClientResponseDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +10,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -28,13 +23,13 @@ public class ClientController {
     }
 
     @GetMapping
-    List<ClientResponseDto> clients() {
-        return clientService.toFindAll();
+    List<ClientResponseDto> clients(String email, String password) {
+        return clientService.toFindAll(email, password);
     }
 
-    @GetMapping("{id}")
-    ResponseEntity<Void> del(@PathVariable("id") String email) {
-        clientService.delete(email);
+    @DeleteMapping()
+    ResponseEntity<Void> del(String email, String password) {
+        clientService.delete(email, password);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
@@ -51,14 +46,14 @@ public class ClientController {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<ClientResponseDto> update(@PathVariable("id") String email, @RequestBody @Valid ClientRequestDto clientRequestDto) {
-        ClientResponseDto answer = clientService.toUpdate(email, clientRequestDto);
+    ResponseEntity<ClientResponseDto> update(@PathVariable("id") String email, String password, @RequestBody @Valid ClientRequestDto clientRequestDto) {
+        ClientResponseDto answer = clientService.toUpdate(email, password, clientRequestDto);
         return ResponseEntity.ok(answer);
     }
 
-    @PatchMapping("/{id}")
-    ResponseEntity<ClientResponseDto> partiallyUpdate(@PathVariable("id") String email, @RequestBody ClientRequestDto clientRequestDto) {
-        ClientResponseDto answer = clientService.toUpdate(email, clientRequestDto);
+    @PatchMapping
+    ResponseEntity<ClientResponseDto> partiallyUpdate(String email, String password, @RequestBody ClientRequestDto clientRequestDto) {
+        ClientResponseDto answer = clientService.toUpdate(email, password, clientRequestDto);
         return ResponseEntity.ok(answer);
 
     }
