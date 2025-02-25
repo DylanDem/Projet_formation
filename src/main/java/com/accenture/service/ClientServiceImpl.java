@@ -74,7 +74,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ClientResponseDto toFind(String email) throws EntityNotFoundException {
         Optional<Client> optClient = clientDao.findById(email);
-        if (optClient.isEmpty()) throw new EntityNotFoundException("Absent ID");
+        if (optClient.isEmpty()) throw new EntityNotFoundException("Login not found");
         Client client = optClient.get();
         return clientMapper.toClientResponseDto(client);
     }
@@ -82,7 +82,6 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<ClientResponseDto> toFindAll() {
-        //TODO : make sure email and PW are equals to what's been registered by the client
 
         return clientDao.findAll().stream()
                 .map(clientMapper::toClientResponseDto)
@@ -93,10 +92,10 @@ public class ClientServiceImpl implements ClientService {
 
 
         Optional<Client> optClient = clientDao.findByEmail(email);
-        Client client = optClient.orElseThrow(() -> new EntityNotFoundException("email not found"));
+        Client client = optClient.orElseThrow(() -> new EntityNotFoundException("Invalid credentials"));
 
         if (password != null && !password.equals(client.getPassword()))
-            throw new EntityNotFoundException("password not found");
+            throw new EntityNotFoundException("Invalid credentials");
 
 
         return clientMapper.toClientResponseDto(client);

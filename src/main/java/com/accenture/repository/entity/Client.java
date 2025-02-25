@@ -19,11 +19,9 @@ import java.util.List;
 public class Client extends ConnectedUser {
 
     @OneToOne(cascade = CascadeType.ALL)
-    @NotBlank(message = "adresse is mandatory")
     private Address address;
 
-    @NotNull(message = "birth date is mandatory")
-    @Past(message = "user must be over 18 years old")
+
     private LocalDate birthDate;
 
     private LocalDate registrationDate = LocalDate.now();

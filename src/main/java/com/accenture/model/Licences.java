@@ -13,5 +13,7 @@ public enum Licences {
     BE,
     C,
     D,
+    D1,
     E,
+
 }
