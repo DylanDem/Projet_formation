@@ -21,9 +21,13 @@ import java.util.List;
 public class Car extends Vehicle {
 
     @ElementCollection
-    private List<Fuels> fuelList;
+    @Enumerated(EnumType.STRING)
+    private List<Fuels> fuelsList;
+
     @ElementCollection
+    @Enumerated(EnumType.STRING)
     private List<Licences> licencesList;
+
 
     private String transmission;
     private int placesNb;

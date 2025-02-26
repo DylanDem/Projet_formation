@@ -139,9 +139,9 @@ public class ClientServiceImpl implements ClientService {
         if (clientOptional.isEmpty())
             throw new EntityNotFoundException(NULLABLE_ID);
 
-        Client client = clientOptional.get();
+        Client existingClient = clientOptional.get();
 
-        Client existingClient = clientMapper.toClient(clientRequestDto);
+        Client client = clientMapper.toClient(clientRequestDto);
 
         toReplace((Client) client, (Client) existingClient);
         Client registrdClient = clientDao.save(existingClient);

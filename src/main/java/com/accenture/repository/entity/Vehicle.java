@@ -23,8 +23,8 @@ public class Vehicle {
     private String model;
     private String color;
 
-    @ElementCollection
-    private List<Types> typesList;
+    @Enumerated(EnumType.STRING)
+    private Types types;
 
     private int dailyLocationPrice;
     private int kilometers;

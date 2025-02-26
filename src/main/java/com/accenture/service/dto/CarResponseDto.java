@@ -10,13 +10,14 @@ import java.util.List;
 
 public record CarResponseDto(
 
+        int id,
         String brand,
         String model,
         String color,
         int placesNb,
         List<Fuels> fuelsList,
         List<Licences> licencesList,
-        List<Types> typesList,
+        Types types,
         int doorsNb,
         String transmission,
         int luggagePiecesNb,

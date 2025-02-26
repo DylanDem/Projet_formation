@@ -25,7 +25,7 @@ public record CarRequestDto(
 
         List<Licences> licencesList,
 
-        List<Types> typesList,
+        Types types,
 
         @Min(3)
         int doorsNb,
@@ -35,19 +35,12 @@ public record CarRequestDto(
 
         int luggagePiecesNb,
 
-        boolean airConditioner
+        boolean airConditioner,
 
-
-
-
-
-
-
-
-
-
-
-
+        int dailyLocationPrice,
+        int kilometers,
+        boolean active,
+        boolean outCarPark
 
 
 ) {

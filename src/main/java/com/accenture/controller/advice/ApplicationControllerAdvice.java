@@ -15,27 +15,27 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class ApplicationControllerAdvice {
 
-    @ExceptionHandler(AdminException.class)
-    public ResponseEntity<ResponseError> adminExceptionManagement(AdminException ex) {
-        ResponseError re = new ResponseError(LocalDateTime.now(), "Functional error", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(re);
-    }
-
-    @ExceptionHandler(ClientException.class)
-    public ResponseEntity<ResponseError> clientExceptionManagement(ClientException ex) {
-        ResponseError re = new ResponseError(LocalDateTime.now(), "Functional error", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(re);
-    }
-
-    @ExceptionHandler(AdminException.class)
-    public ResponseEntity<ResponseError> vehicleExceptionManagement(VehicleException ex) {
-        ResponseError re = new ResponseError(LocalDateTime.now(), "Functional error", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(re);
-    }
-
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<ResponseError> enfExceptionManagement(AdminException ex) {
-        ResponseError re = new ResponseError(LocalDateTime.now(), "Bad request", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(re);
-    }
+//    @ExceptionHandler(AdminException.class)
+//    public ResponseEntity<ResponseError> adminExceptionManagement(AdminException ex) {
+//        ResponseError re = new ResponseError(LocalDateTime.now(), "Functional error", ex.getMessage());
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(re);
+//    }
+//
+//    @ExceptionHandler(ClientException.class)
+//    public ResponseEntity<ResponseError> clientExceptionManagement(ClientException ex) {
+//        ResponseError re = new ResponseError(LocalDateTime.now(), "Functional error", ex.getMessage());
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(re);
+//    }
+//
+//    @ExceptionHandler(AdminException.class)
+//    public ResponseEntity<ResponseError> vehicleExceptionManagement(VehicleException ex) {
+//        ResponseError re = new ResponseError(LocalDateTime.now(), "Functional error", ex.getMessage());
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(re);
+//    }
+//
+//    @ExceptionHandler(EntityNotFoundException.class)
+//    public ResponseEntity<ResponseError> enfExceptionManagement(AdminException ex) {
+//        ResponseError re = new ResponseError(LocalDateTime.now(), "Bad request", ex.getMessage());
+//        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(re);
+//    }
 }
