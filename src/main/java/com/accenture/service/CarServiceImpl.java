@@ -31,7 +31,7 @@ public class CarServiceImpl implements CarService {
 
     private static void carVerify(CarRequestDto carRequestDto) throws VehicleException {
         if (carRequestDto == null)
-            throw new VehicleException("ClientRequestDto is null");
+            throw new VehicleException("CarRequestDto is null");
         if (carRequestDto.brand() == null || carRequestDto.brand().isBlank())
             throw new VehicleException("car's brand is absent");
         if (carRequestDto.model() == null || carRequestDto.model().isBlank())

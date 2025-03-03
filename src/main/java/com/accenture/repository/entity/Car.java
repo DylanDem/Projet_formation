@@ -28,6 +28,9 @@ public class Car extends Vehicle {
     @Enumerated(EnumType.STRING)
     private List<Licences> licencesList;
 
+    @Enumerated(EnumType.STRING)
+    private Types types;
+
 
     private String transmission;
     private int placesNb;

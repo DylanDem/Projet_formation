@@ -2,11 +2,8 @@ package com.accenture.controller;
 
 
 import com.accenture.service.CarService;
-import com.accenture.service.CarServiceImpl;
 import com.accenture.service.dto.CarRequestDto;
 import com.accenture.service.dto.CarResponseDto;
-import com.accenture.service.dto.ClientRequestDto;
-import com.accenture.service.dto.ClientResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
