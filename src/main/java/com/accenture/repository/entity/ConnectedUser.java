@@ -12,7 +12,8 @@ import javax.validation.constraints.Size;
 
 @Data
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "role")
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class ConnectedUser {

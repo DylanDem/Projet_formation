@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-@DiscriminatorValue("Client")
+@DiscriminatorValue("ROLE_CLIENT")
 public class Client extends ConnectedUser {
 
     @OneToOne(cascade = CascadeType.ALL)

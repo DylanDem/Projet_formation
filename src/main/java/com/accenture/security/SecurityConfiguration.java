@@ -58,7 +58,7 @@ public class SecurityConfiguration {
     @Bean
     UserDetailsManager userDetailsManager(DataSource dataSource) {
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-        jdbcUserDetailsManager.setUsersByUsernameQuery("select mail, password from clients where email = ?");
+        jdbcUserDetailsManager.setUsersByUsernameQuery("select mail, password, 1 from clients where email = ?");
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select mail, role from clients where email = ?");
         return jdbcUserDetailsManager;
     }
