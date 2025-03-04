@@ -106,10 +106,10 @@ public class MotorbikeServiceImpl implements MotorbikeService {
             existingMotorbike.setDailyLocationPrice(motorbike.getDailyLocationPrice());
         if (motorbike.getKilometers() != 0)
             existingMotorbike.setKilometers(motorbike.getKilometers());
-        if (motorbike.isActive() != existingMotorbike.isActive())
-            existingMotorbike.setActive(motorbike.isActive());
-        if (motorbike.isOutCarPark() != existingMotorbike.isOutCarPark())
-            existingMotorbike.setOutCarPark(motorbike.isOutCarPark());
+        if (motorbike.getActive() != existingMotorbike.getActive())
+            existingMotorbike.setActive(motorbike.getActive());
+        if (motorbike.getOutCarPark() != existingMotorbike.getOutCarPark())
+            existingMotorbike.setOutCarPark(motorbike.getOutCarPark());
     }
 
 
@@ -141,38 +141,47 @@ public class MotorbikeServiceImpl implements MotorbikeService {
      */
     @Override
     public MotorbikeResponseDto toPartiallyUpdate(int id, MotorbikeRequestDto motorbikeRequestDto) throws VehicleException, EntityNotFoundException {
+        logger.info("Starting toPartiallyUpdate method for ID : {} ", id);
+
         Optional<Motorbike> motorbikeOptional = motorbikeDao.findById(id);
         if (motorbikeOptional.isEmpty())
             throw new EntityNotFoundException(NULLABLE_ID);
 
+        logger.info("Motorbike found with ID : {} ", id);
         Motorbike existingMotorbike = motorbikeOptional.get();
 
         Motorbike motorbike = motorbikeMapper.toMotorbike(motorbikeRequestDto);
+        logger.info("Motorbike mapped from request DTO");
 
         toReplace(motorbike, existingMotorbike);
+        logger.info("Replaced existing motorbike details with new motorbike details");
+
         existingMotorbike.setId(id);
         Motorbike registrdMotorbike = motorbikeDao.save(existingMotorbike);
+        logger.info("Saved updated Motorbike with ID : {} ", id);
+
         return motorbikeMapper.toMotorbikeResponseDto(registrdMotorbike);
     }
 
 
+    /**
+     * Deletes a motorbike identified by its ID. If the motorbike is associated with
+     * any locations, it marks the motorbike as out of the car park instead of
+     * deleting it.
+     *
+     * @param id the ID of the motorbike to be deleted
+     * @throws EntityNotFoundException if no motorbike is found with the specified ID
+     */
     @Override
     public void delete(int id) throws EntityNotFoundException {
-
-        logger.info("Starting delete method for ID : {}", id);
         Motorbike motorbike = motorbikeDao.findById(id).orElseThrow(() -> new EntityNotFoundException("No car for this ID"));
-        logger.info("Motorbike found with ID : {}", id);
         List<Location> locationList = locationDao.findByVehicleId(motorbike.getId());
-
-        logger.info("Location list size : {}", locationList.size());
         if (locationList.isEmpty()) {
             motorbikeDao.delete(motorbike);
-            logger.info("Motorbike deleted with ID : {} ", id);
             return;
         }
         motorbike.setOutCarPark(true);
         motorbikeDao.save(motorbike);
-        logger.info("Motorbike updated to out-of-car-park status with ID : {} ", id);
 
     }
 

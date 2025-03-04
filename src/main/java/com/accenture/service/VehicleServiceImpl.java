@@ -1,8 +1,10 @@
 package com.accenture.service;
 
-import com.accenture.Application;
 import com.accenture.repository.CarDao;
 import com.accenture.repository.MotorbikeDao;
+import com.accenture.repository.entity.Car;
+import com.accenture.repository.entity.Motorbike;
+import com.accenture.repository.entity.Vehicle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VehicleServiceImpl implements VehicleService {
@@ -41,4 +44,28 @@ public class VehicleServiceImpl implements VehicleService {
         logger.info("Exiting findAllVehicles method with {} vehicles found", vehicles.size());
         return vehicles;
     }
+
+    public List<Vehicle> search(Boolean active, Boolean outCarPark) {
+        logger.info("Entering the search method with active={} and outCarPark={}", active, outCarPark);
+        List<Vehicle> vehicles = new ArrayList<>();
+        try {
+            logger.debug("Retrieving all cars");
+            List<Car> car = carDao.findAll();
+            logger.debug("Retrieving all motorcycles");
+            List<Motorbike> motorbike = motorbikeDao.findAll();
+            vehicles.addAll(filterVehicles(car, active, outCarPark));
+            vehicles.addAll(filterVehicles(motorbike, active, outCarPark));
+        } catch (Exception e) {
+            logger.error("An exception occurred while searching for all vehicles: {}", e.getMessage(), e);
+        }
+        logger.info("Exiting the search method with {} vehicles found", vehicles.size());
+        return vehicles;
+    }
+
+    private <T extends Vehicle> List<T> filterVehicles(List<T> vehicles, Boolean active, Boolean outCarPark) {
+        return vehicles.stream().filter(vehicle -> (active == null || vehicle.getActive().equals(active)) &&
+                (outCarPark == null || vehicle.getOutCarPark().equals(outCarPark))).collect(Collectors.toList());
+    }
+
+
 }

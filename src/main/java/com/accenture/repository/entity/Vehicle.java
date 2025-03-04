@@ -26,6 +26,6 @@ public class Vehicle {
     private int kilometers;
 
 
-    private boolean active;
-    private boolean outCarPark;
+    private Boolean active;
+    private Boolean outCarPark;
 }

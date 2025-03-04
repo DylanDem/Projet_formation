@@ -95,10 +95,10 @@ public class CarServiceImpl implements CarService {
             existingCar.setDailyLocationPrice(car.getDailyLocationPrice());
         if (car.getKilometers() != 0)
             existingCar.setKilometers(car.getKilometers());
-        if (car.isActive() != existingCar.isActive())
-            existingCar.setActive(car.isActive());
-        if (car.isOutCarPark() != existingCar.isOutCarPark())
-            existingCar.setOutCarPark(car.isOutCarPark());
+        if (car.getActive() != existingCar.getActive())
+            existingCar.setActive(car.getActive());
+        if (car.getOutCarPark() != existingCar.getOutCarPark())
+            existingCar.setOutCarPark(car.getOutCarPark());
         if (car.isAirConditioner() != existingCar.isAirConditioner())
             existingCar.setAirConditioner(car.isAirConditioner());
     }
@@ -116,6 +116,7 @@ public class CarServiceImpl implements CarService {
         carVerify(carRequestDto);
         Car car = carMapper.toCar(carRequestDto);
 
+        car.setActive(true);
         car.setOutCarPark(false);
         Car backedCar = carDao.save(car);
 
