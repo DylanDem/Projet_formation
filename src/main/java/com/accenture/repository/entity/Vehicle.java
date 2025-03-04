@@ -1,6 +1,7 @@
 package com.accenture.repository.entity;
 
 import com.accenture.model.Types;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,8 @@ public class Vehicle {
 
     private int dailyLocationPrice;
     private int kilometers;
+
+
     private boolean active;
     private boolean outCarPark;
 }

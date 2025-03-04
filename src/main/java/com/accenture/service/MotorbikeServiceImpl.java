@@ -2,17 +2,16 @@ package com.accenture.service;
 
 
 import com.accenture.exception.VehicleException;
-import com.accenture.repository.CarDao;
+import com.accenture.repository.LocationDao;
 import com.accenture.repository.MotorbikeDao;
-import com.accenture.repository.entity.Car;
+import com.accenture.repository.entity.Location;
 import com.accenture.repository.entity.Motorbike;
-import com.accenture.service.dto.CarRequestDto;
-import com.accenture.service.dto.CarResponseDto;
 import com.accenture.service.dto.MotorbikeRequestDto;
 import com.accenture.service.dto.MotorbikeResponseDto;
-import com.accenture.service.mapper.CarMapper;
 import com.accenture.service.mapper.MotorbikeMapper;
 import jakarta.persistence.EntityNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,15 +24,16 @@ import java.util.Optional;
 @Service
 public class MotorbikeServiceImpl implements MotorbikeService {
 
-
-
+    private static final Logger logger = LoggerFactory.getLogger(MotorbikeServiceImpl.class);
     private static final String NULLABLE_ID = "Non present ID";
     private final MotorbikeDao motorbikeDao;
     private final MotorbikeMapper motorbikeMapper;
+    private final LocationDao locationDao;
 
-    public MotorbikeServiceImpl(MotorbikeDao motorbikeDao, MotorbikeMapper motorbikeMapper) {
+    public MotorbikeServiceImpl(MotorbikeDao motorbikeDao, MotorbikeMapper motorbikeMapper, LocationDao locationDao) {
         this.motorbikeDao = motorbikeDao;
         this.motorbikeMapper = motorbikeMapper;
+        this.locationDao = locationDao;
     }
 
 
@@ -78,7 +78,7 @@ public class MotorbikeServiceImpl implements MotorbikeService {
     /**
      * Replaces the existing motorbike's attributes with the given motorbike's attributes.
      *
-     * @param motorbike the motorbike with the new attributes
+     * @param motorbike         the motorbike with the new attributes
      * @param existingMotorbike the existing motorbike to be updated
      */
     private static void toReplace(Motorbike motorbike, Motorbike existingMotorbike) {
@@ -113,8 +113,6 @@ public class MotorbikeServiceImpl implements MotorbikeService {
     }
 
 
-
-
     /**
      * Adds a new motorbike using the given motorbike request DTO.
      *
@@ -132,14 +130,13 @@ public class MotorbikeServiceImpl implements MotorbikeService {
     }
 
 
-
     /**
      * Partially updates an existing motorbike with the given ID using the given motorbike request DTO.
      *
-     * @param id the ID of the motorbike to be partially updated
+     * @param id                  the ID of the motorbike to be partially updated
      * @param motorbikeRequestDto the motorbike request DTO with the new attributes
      * @return the response DTO of the updated motorbike
-     * @throws VehicleException if the motorbike request DTO is invalid
+     * @throws VehicleException        if the motorbike request DTO is invalid
      * @throws EntityNotFoundException if the motorbike with the given ID is not found
      */
     @Override
@@ -159,17 +156,24 @@ public class MotorbikeServiceImpl implements MotorbikeService {
     }
 
 
-
-    /**
-     * Deletes the motorbike with the given ID.
-     *
-     * @param id the ID of the motorbike to be deleted
-     * @throws EntityNotFoundException if the motorbike with the given ID is not found
-     */
     @Override
     public void delete(int id) throws EntityNotFoundException {
-        if (motorbikeDao.existsById(id))
-            motorbikeDao.deleteById(id);
+
+        logger.info("Starting delete method for ID : {}", id);
+        Motorbike motorbike = motorbikeDao.findById(id).orElseThrow(() -> new EntityNotFoundException("No car for this ID"));
+        logger.info("Motorbike found with ID : {}", id);
+        List<Location> locationList = locationDao.findByVehicleId(motorbike.getId());
+
+        logger.info("Location list size : {}", locationList.size());
+        if (locationList.isEmpty()) {
+            motorbikeDao.delete(motorbike);
+            logger.info("Motorbike deleted with ID : {} ", id);
+            return;
+        }
+        motorbike.setOutCarPark(true);
+        motorbikeDao.save(motorbike);
+        logger.info("Motorbike updated to out-of-car-park status with ID : {} ", id);
+
     }
 
 
@@ -180,12 +184,12 @@ public class MotorbikeServiceImpl implements MotorbikeService {
      */
     @Override
     public List<MotorbikeResponseDto> toFindAll() {
+        logger.info("Gathering all motorbikes.");
 
         return motorbikeDao.findAll().stream()
                 .map(motorbikeMapper::toMotorbikeResponseDto)
                 .toList();
     }
-
 
 
     /**
@@ -197,10 +201,18 @@ public class MotorbikeServiceImpl implements MotorbikeService {
      */
     @Override
     public MotorbikeResponseDto toFind(int id) throws EntityNotFoundException {
+        logger.info("Searching a motorbike with the following ID : {}", id);
         Optional<Motorbike> motorbikeOptional = motorbikeDao.findById(id);
-        if (motorbikeOptional.isEmpty()) throw new EntityNotFoundException("Absent id");
+
+        if (motorbikeOptional.isEmpty()) {
+            logger.error("No motorbike found for the following id : {}", id);
+            throw new EntityNotFoundException("Absent id");
+        }
         Motorbike motorbike = motorbikeOptional.get();
+        logger.info("Found motorbike found : {}", motorbike);
+
         return motorbikeMapper.toMotorbikeResponseDto(motorbike);
     }
+
 
 }

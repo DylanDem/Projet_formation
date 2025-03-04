@@ -3,7 +3,9 @@ package com.accenture.service;
 import com.accenture.Application;
 import com.accenture.exception.VehicleException;
 import com.accenture.repository.CarDao;
+import com.accenture.repository.LocationDao;
 import com.accenture.repository.entity.Car;
+import com.accenture.repository.entity.Location;
 import com.accenture.service.dto.CarRequestDto;
 import com.accenture.service.dto.CarResponseDto;
 import com.accenture.service.mapper.CarMapper;
@@ -27,10 +29,12 @@ public class CarServiceImpl implements CarService {
     private static final String NULLABLE_ID = "Non present ID";
     private final CarDao carDao;
     private final CarMapper carMapper;
+    private final LocationDao locationDao;
 
-    public CarServiceImpl(CarDao carDao, CarMapper carMapper) {
+    public CarServiceImpl(CarDao carDao, CarMapper carMapper, LocationDao locationDao) {
         this.carDao = carDao;
         this.carMapper = carMapper;
+        this.locationDao = locationDao;
     }
 
     private static void carVerify(CarRequestDto carRequestDto) throws VehicleException {
@@ -111,6 +115,8 @@ public class CarServiceImpl implements CarService {
     public CarResponseDto toAdd(CarRequestDto carRequestDto) throws VehicleException {
         carVerify(carRequestDto);
         Car car = carMapper.toCar(carRequestDto);
+
+        car.setOutCarPark(false);
         Car backedCar = carDao.save(car);
 
         return carMapper.toCarResponseDto(backedCar);
@@ -143,16 +149,18 @@ public class CarServiceImpl implements CarService {
     }
 
 
-    /**
-     * Deletes the car with the specified ID.
-     *
-     * @param id The ID of the car to be deleted.
-     * @throws EntityNotFoundException If the car with the specified ID is not found.
-     */
+
     @Override
     public void delete(int id) throws EntityNotFoundException {
-        if (carDao.existsById(id))
-            carDao.deleteById(id);
+        Car car = carDao.findById(id).orElseThrow(() -> new EntityNotFoundException("No car for this ID"));
+        List<Location> locationList = locationDao.findByVehicleId(car.getId());
+        if (locationList.isEmpty()) {
+            carDao.delete(car);
+            return;
+        }
+            car.setOutCarPark(true);
+            carDao.save(car);
+
     }
 
 

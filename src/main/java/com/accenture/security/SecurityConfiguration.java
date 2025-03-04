@@ -45,8 +45,8 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/cars/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/cars/**").permitAll()
                         .requestMatchers(HttpMethod.PATCH, "/cars/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/cars/**").hasAnyRole("ADMIN", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/cars/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/cars/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/vehicles/**").permitAll()
                         .anyRequest().authenticated());
         return http.build();
     }
