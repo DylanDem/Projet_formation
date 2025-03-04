@@ -1,10 +1,11 @@
-package com.accenture;
+package com.accenture.service;
 
+import com.accenture.exception.ClientException;
 import com.accenture.model.Licences;
 import com.accenture.repository.ClientDao;
 import com.accenture.repository.entity.Address;
 import com.accenture.repository.entity.Client;
-import com.accenture.service.ClientServiceImpl;
+import com.accenture.service.dto.ClientRequestDto;
 import com.accenture.service.dto.ClientResponseDto;
 import com.accenture.service.mapper.ClientMapper;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,8 +17,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.swing.text.html.Option;
-import javax.swing.text.html.parser.Entity;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +25,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class ClientServiceTests {
-
 
     @Mock
     ClientDao daoMock;
@@ -108,17 +106,27 @@ class ClientServiceTests {
     }
 
 
+    @DisplayName("""
+            find(email) throws a clientResponseDto whenever the client IS registered in the database)
+            """)
+    @Test
+    void testDoesExist() {
+        Client c = createClientWallace();
+        Optional<Client> optClient = Optional.of(c);
+        Mockito.when(daoMock.findById("Novotnypaulin@gmail.com")).thenReturn(optClient);
+        ClientResponseDto dto = createClientResponseDtoPaulin();
+        Mockito.when(mapperMock.toClientResponseDto(c)).thenReturn(dto);
+
+        ClientResponseDto result = clientService.toFind("Novotnypaulin@gmail.com");
+        assertSame(dto, result);
+    }
+
 //    @DisplayName("""
-//            find(email) throws a clientResponseDto whenever the client IS registered in the database)
+//            Test if null is thrown in toAdd
 //            """)
 //    @Test
-//    void testDoesExist() {
-//        Client c = createClientWallace();
-//        Optional<Client> optClient = Optional.of(c);
-//        Mockito.when(daoMock.findByEmail("Novotnypaulin@gmail.com")).thenReturn(optClient);
-//        ClientResponseDto dto = createClientResponseDtoPaulin();
-//        Mockito.when(mapperMock.toClientResponseDto(c)).thenReturn(dto);
-//        assertSame(dto, clientService.toFind("Novotnypaulin@gmail.com"));
+//    void toAddNull(){
+//        ClientException ex = assertThrows(ClientException.class, () ->clientService.toAdd(null));
+//        assertEquals("Query is null", ex.getMessage());
 //    }
-
 }

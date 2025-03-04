@@ -1,5 +1,6 @@
 package com.accenture.service;
 
+import com.accenture.Application;
 import com.accenture.exception.VehicleException;
 import com.accenture.repository.CarDao;
 import com.accenture.repository.entity.Car;
@@ -7,6 +8,8 @@ import com.accenture.service.dto.CarRequestDto;
 import com.accenture.service.dto.CarResponseDto;
 import com.accenture.service.mapper.CarMapper;
 import jakarta.persistence.EntityNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +23,7 @@ import java.util.Optional;
 @Service
 public class CarServiceImpl implements CarService {
 
+    private static final Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
     private static final String NULLABLE_ID = "Non present ID";
     private final CarDao carDao;
     private final CarMapper carMapper;

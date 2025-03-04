@@ -1,5 +1,6 @@
 package com.accenture.service;
 
+import com.accenture.Application;
 import com.accenture.exception.ClientException;
 import com.accenture.model.Licences;
 import com.accenture.repository.ClientDao;
@@ -8,6 +9,8 @@ import com.accenture.service.dto.ClientRequestDto;
 import com.accenture.service.dto.ClientResponseDto;
 import com.accenture.service.mapper.ClientMapper;
 import jakarta.persistence.EntityNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,7 @@ import java.util.Optional;
 @Service
 public class ClientServiceImpl implements ClientService {
 
+    private static final Logger logger = LoggerFactory.getLogger(ClientServiceImpl.class);
     private static final String NULLABLE_ID = "Non present ID";
     private static final String REGEX_PW = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[&#@-_§])[A-Za-z\\d&%$_]{8,16}$";
     @Autowired

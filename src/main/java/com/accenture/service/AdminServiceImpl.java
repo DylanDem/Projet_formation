@@ -1,5 +1,6 @@
 package com.accenture.service;
 
+import com.accenture.Application;
 import com.accenture.exception.AdminException;
 import com.accenture.exception.ClientException;
 import com.accenture.repository.AdminDao;
@@ -7,6 +8,8 @@ import com.accenture.repository.entity.Admin;
 import com.accenture.service.dto.*;
 import com.accenture.service.mapper.AdminMapper;
 import jakarta.persistence.EntityNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,7 @@ import java.util.Optional;
 @Service
 public class AdminServiceImpl implements AdminService {
 
+    private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
     private static final String NULLABLE_ID = "Non present ID";
     @Autowired
     private final AdminDao adminDao;
