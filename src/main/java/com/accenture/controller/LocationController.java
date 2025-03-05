@@ -42,12 +42,12 @@ public class LocationController {
     }
 
     @PostMapping
-    ResponseEntity<Void> add(@RequestBody @Valid String email, int idVehicle, LocationRequestDto locationRequestDto) {
-        LocationResponseDto registrdLocation = locationService.addReservation(email, idVehicle, locationRequestDto);
+    ResponseEntity<Void> add(String email, @RequestBody @Valid LocationRequestDto locationRequestDto) {
+        LocationResponseDto registrdLocation = locationService.addReservation(email, locationRequestDto);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(registrdLocation.idVehicle())
+                .buildAndExpand(registrdLocation.vehicle().getId())
                 .toUri();
 
         return ResponseEntity.created(location).build();

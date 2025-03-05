@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface LocationService {
 
-    LocationResponseDto addReservation(String email, int idVehicle, LocationRequestDto locationRequestDto);
+    LocationResponseDto addReservation(String email, LocationRequestDto locationRequestDto);
     List<LocationResponseDto> toFindAll();
     LocationResponseDto toFind(int id) throws EntityNotFoundException;
     void delete(int id) throws EntityNotFoundException;

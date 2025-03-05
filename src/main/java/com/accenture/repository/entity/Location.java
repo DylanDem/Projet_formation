@@ -27,7 +27,6 @@ public class Location {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
-
     private Accessory accessory;
     private LocalDate startDate;
     private LocalDate endDate;

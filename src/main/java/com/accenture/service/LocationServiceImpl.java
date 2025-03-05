@@ -1,14 +1,13 @@
 package com.accenture.service;
 
 import com.accenture.exception.LocationException;
+import com.accenture.model.TypeVehicleEnum;
 import com.accenture.repository.ClientDao;
 import com.accenture.repository.LocationDao;
 import com.accenture.repository.VehicleDao;
-import com.accenture.repository.entity.Car;
 import com.accenture.repository.entity.Client;
 import com.accenture.repository.entity.Location;
 import com.accenture.repository.entity.Vehicle;
-import com.accenture.service.dto.CarResponseDto;
 import com.accenture.service.dto.LocationRequestDto;
 import com.accenture.service.dto.LocationResponseDto;
 import com.accenture.service.mapper.LocationMapper;
@@ -58,7 +57,6 @@ public class LocationServiceImpl implements LocationService {
                 locationRequestDto.validationDate().isAfter(locationRequestDto.endDate())) {
             throw new LocationException("Validation date is out of range");
         }
-
     }
 
     private static void toReplace(Location location, Location existingLocation) {
@@ -79,12 +77,13 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public LocationResponseDto addReservation(String email, int idVehicle, LocationRequestDto locationRequestDto) {
+    public LocationResponseDto addReservation(String email, LocationRequestDto locationRequestDto) throws LocationException {
+        locationVerify(locationRequestDto);
         Client client = clientDao.findById(email).orElseThrow(() -> new EntityNotFoundException("Client not found"));
         Location location = locationMapper.toLocation(locationRequestDto);
         location.setClient(client);
 
-        Vehicle vehicle = vehicleDao.findById(idVehicle).orElseThrow(() -> new EntityNotFoundException("Vehicle not found"));
+        Vehicle vehicle = vehicleDao.findById(locationRequestDto.idVehicle()).orElseThrow(() -> new EntityNotFoundException("Vehicle not found"));
         location.setVehicle(vehicle);
 
         Location savedLocation = locationDao.save(location);
