@@ -20,17 +20,19 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "client_id")
     private Client client;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
     private Accessory accessory;
     private LocalDate startDate;
     private LocalDate endDate;
     private int travelledKilometers;
-    private int totalAmount;
+    private int totalAmountEuros;
     private LocalDate validationDate;
     private String locationState;
 

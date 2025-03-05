@@ -18,6 +18,7 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String vehiculeType;
     private String brand;
     private String model;
     private String color;
