@@ -1,6 +1,7 @@
 package com.accenture.service.dto;
 
 import com.accenture.model.Licences;
+import com.accenture.model.TypeVehicleEnum;
 import com.accenture.model.TypesMotorbike;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,6 +9,10 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 public record MotorbikeRequestDto(
+
+        @NotBlank(message = "vehicle's type's mandatory")
+        TypeVehicleEnum typeVehicleEnum,
+
         @NotBlank(message = "Brand is mandatory")
         String brand,
 

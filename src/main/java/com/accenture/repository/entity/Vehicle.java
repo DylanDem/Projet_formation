@@ -1,11 +1,13 @@
 package com.accenture.repository.entity;
 
+import com.accenture.model.TypeVehicleEnum;
 import com.accenture.model.Types;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.mapstruct.EnumMapping;
 
 @Data
 @Entity
@@ -17,6 +19,10 @@ public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+
+    @Enumerated(EnumType.STRING)
+    private TypeVehicleEnum typeVehicleEnum;
 
     private String brand;
     private String model;

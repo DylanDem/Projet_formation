@@ -47,6 +47,10 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PATCH, "/cars/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/cars/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/vehicles/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/locations/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/locations/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE,"/locations/**").permitAll()
+                        .requestMatchers(HttpMethod.PATCH,"/locations/**").permitAll()
                         .anyRequest().authenticated());
         return http.build();
     }
