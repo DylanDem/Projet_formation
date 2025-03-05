@@ -1,8 +1,11 @@
 package com.accenture.controller;
 
 import com.accenture.service.AdminService;
+import com.accenture.service.LocationServiceImpl;
 import com.accenture.service.dto.AdminRequestDto;
 import com.accenture.service.dto.AdminResponseDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +18,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/admins")
 public class AdminController {
+
+    private static final Logger logger = LoggerFactory.getLogger(LocationServiceImpl.class);
+
 
     private AdminService adminService;
 
@@ -29,6 +35,7 @@ public class AdminController {
 
     @DeleteMapping
     ResponseEntity<Void> del( String email, String password) {
+        logger.info("Entering the delete admin method");
         adminService.deleteAdmin(email, password);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
