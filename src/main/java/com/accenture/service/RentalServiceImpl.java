@@ -75,6 +75,15 @@ public class RentalServiceImpl implements RentalService {
             existingRental.setTotalAmountEuros(rental.getTotalAmountEuros());
     }
 
+
+    /**
+     * Adds a new rental reservation based on the provided email and RentalRequestDto.
+     *
+     * @param email The email of the client making the reservation
+     * @param rentalRequestDto The RentalRequestDto containing the rental information
+     * @return The RentalResponseDto object containing the saved rental information
+     * @throws LocationException If there is an error with the rental request
+     */
     @Override
     public RentalResponseDto addReservation(String email, RentalRequestDto rentalRequestDto) throws LocationException {
         locationVerify(rentalRequestDto);
@@ -91,6 +100,16 @@ public class RentalServiceImpl implements RentalService {
 
     }
 
+
+    /**
+     * Partially updates an existing rental based on its ID and the provided RentalRequestDto.
+     *
+     * @param id The ID of the rental to partially update
+     * @param rentalRequestDto The RentalRequestDto containing the updated rental information
+     * @return The RentalResponseDto object containing the updated rental information
+     * @throws LocationException If there is an error with the rental request
+     * @throws EntityNotFoundException If the rental is not found
+     */
     @Override
     public RentalResponseDto toPartiallyUpdate(int id, RentalRequestDto rentalRequestDto) throws LocationException, EntityNotFoundException {
         Optional<Rental> locationOptional = rentalDao.findById(id);
@@ -107,6 +126,14 @@ public class RentalServiceImpl implements RentalService {
         return rentalMapper.toLocationResponseDto(registrdRental);
     }
 
+
+    /**
+     * Deletes a rental based on its ID.
+     * If the rental is associated with a vehicle, the vehicle will be marked as active.
+     *
+     * @param id The ID of the rental to delete
+     * @throws EntityNotFoundException If the rental is not found
+     */
     @Override
     public void delete(int id) throws EntityNotFoundException {
         Rental rental = rentalDao.findById(id).orElseThrow(() -> new EntityNotFoundException("No location found for this ID"));
@@ -114,6 +141,11 @@ public class RentalServiceImpl implements RentalService {
         rentalDao.delete(rental);
     }
 
+    /**
+     * Retrieves a list of all rentals.
+     *
+     * @return A list of RentalResponseDto objects
+     */
     @Override
     public List<RentalResponseDto> toFindAll() {
 
@@ -122,6 +154,13 @@ public class RentalServiceImpl implements RentalService {
                 .toList();
     }
 
+    /**
+     * Retrieves a rental based on its ID.
+     *
+     * @param id The ID of the rental to retrieve
+     * @return The RentalResponseDto object containing the rental information
+     * @throws EntityNotFoundException If the rental is not found
+     */
     @Override
     public RentalResponseDto toFind(int id) throws EntityNotFoundException {
         Optional<Rental> locationOptional = rentalDao.findById(id);

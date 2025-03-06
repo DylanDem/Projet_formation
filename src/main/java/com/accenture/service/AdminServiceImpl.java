@@ -32,12 +32,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
 
-    /**
-     * Verifies the validity of the provided AdminRequestDto.
-     *
-     * @param adminRequestDto The AdminRequestDto to verify
-     * @throws ClientException If the AdminRequestDto is invalid
-     */
+
     private static void verifyAdmin(AdminRequestDto adminRequestDto) throws ClientException {
         if (adminRequestDto == null)
             throw new ClientException("AdminRequestDto is null");
@@ -55,12 +50,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
 
-    /**
-     * Replaces the properties of the existing admin with those of the provided admin.
-     *
-     * @param admin The admin containing the new properties
-     * @param existingAdmin The existing admin to update
-     */
+
     private static void toReplaceAdmin(Admin admin, Admin existingAdmin) {
         if (admin.getName() != null)
             existingAdmin.setName(admin.getName());

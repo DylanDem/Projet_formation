@@ -150,6 +150,13 @@ public class CarServiceImpl implements CarService {
 
 
 
+    /**
+     * Deletes a car based on its ID.
+     * If the car is associated with any rentals, it will be marked as out of the car park instead of being deleted.
+     *
+     * @param id The ID of the car to delete
+     * @throws EntityNotFoundException If no car is found for the given ID
+     */
     @Override
     public void delete(int id) throws EntityNotFoundException {
         Car car = carDao.findById(id).orElseThrow(() -> new EntityNotFoundException("No car for this ID"));

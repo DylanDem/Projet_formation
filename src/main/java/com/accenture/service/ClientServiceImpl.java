@@ -75,6 +75,14 @@ public class ClientServiceImpl implements ClientService {
             existingClient.setAddress((client.getAddress()));
     }
 
+
+    /**
+     * Retrieves a client based on their email.
+     *
+     * @param email The email of the client to retrieve
+     * @return The ClientResponseDto object containing the client's information
+     * @throws EntityNotFoundException If the client is not found
+     */
     @Override
     public ClientResponseDto toFind(String email) throws EntityNotFoundException {
         Optional<Client> optClient = clientDao.findById(email);
@@ -84,6 +92,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
 
+
+    /**
+     * Retrieves a list of all clients.
+     *
+     * @return A list of ClientResponseDto objects
+     */
     @Override
     public List<ClientResponseDto> toFindAll() {
 
@@ -92,6 +106,16 @@ public class ClientServiceImpl implements ClientService {
                 .toList();
     }
 
+
+
+    /**
+     * Retrieves client information based on their email and password.
+     *
+     * @param email The email of the client to retrieve
+     * @param password The password of the client to retrieve
+     * @return The ClientResponseDto object containing the client's information
+     * @throws EntityNotFoundException If the credentials are invalid
+     */
     public ClientResponseDto getInfos (String email, String password) {
 
 
@@ -107,6 +131,14 @@ public class ClientServiceImpl implements ClientService {
 
     }
 
+
+    /**
+     * Adds a new client based on the provided ClientRequestDto.
+     *
+     * @param clientRequestDto The ClientRequestDto containing the new client's information
+     * @return The ClientResponseDto object containing the added client's information
+     * @throws ClientException If there is an error adding the client
+     */
     @Override
     public ClientResponseDto toAdd(ClientRequestDto clientRequestDto) throws ClientException {
         clientVerify(clientRequestDto);
@@ -123,6 +155,16 @@ public class ClientServiceImpl implements ClientService {
     }
 
 
+    /**
+     * Updates an existing client based on their email, password, and the provided ClientRequestDto.
+     *
+     * @param email The email of the client to update
+     * @param password The password of the client to update
+     * @param clientRequestDto The ClientRequestDto containing the updated client's information
+     * @return The ClientResponseDto object containing the updated client's information
+     * @throws ClientException If there is an error updating the client
+     * @throws EntityNotFoundException If the client is not found
+     */
     @Override
     public ClientResponseDto toUpdate(String email, String password, ClientRequestDto clientRequestDto) throws ClientException, EntityNotFoundException {
         if (!clientDao.existsById(email))
@@ -137,6 +179,15 @@ public class ClientServiceImpl implements ClientService {
         return clientMapper.toClientResponseDto(registrdClient);
     }
 
+    /**
+     * Partially updates an existing client based on their email and the provided ClientRequestDto.
+     *
+     * @param email The email of the client to partially update
+     * @param clientRequestDto The ClientRequestDto containing the updated client's information
+     * @return The ClientResponseDto object containing the updated client's information
+     * @throws ClientException If there is an error updating the client
+     * @throws EntityNotFoundException If the client is not found
+     */
     @Override
     public ClientResponseDto toPartiallyUpdate(String email, ClientRequestDto clientRequestDto) throws ClientException, EntityNotFoundException {
         Optional<Client> clientOptional = clientDao.findById(email);
@@ -153,6 +204,13 @@ public class ClientServiceImpl implements ClientService {
     }
 
 
+    /**
+     * Deletes a client based on their email and password.
+     *
+     * @param email The email of the client to delete
+     * @param password The password of the client to delete
+     * @throws EntityNotFoundException If the client is not found
+     */
     @Override
     public void delete(String email, String password) throws EntityNotFoundException {
         if (clientDao.existsById(email))
@@ -160,6 +218,23 @@ public class ClientServiceImpl implements ClientService {
 
     }
 
+
+    /**
+     * Searches for clients based on various criteria.
+     *
+     * @param email The email of the client to search for
+     * @param firstName The first name of the client to search for
+     * @param name The name of the client to search for
+     * @param birthDate The birth date of the client to search for
+     * @param street The street address of the client to search for
+     * @param postalCode The postal code of the client to search for
+     * @param town The town of the client to search for
+     * @param inactive The inactive status of the client to search for
+     * @param licencesList The list of licenses of the client to search for
+     * @param registrationDate The registration date of the client to search for
+     * @return A list of ClientResponseDto objects matching the search criteria
+     * @throws ClientException If no valid search criteria are provided
+     */
     @Override
     public List<ClientResponseDto> search(String email, String firstName, String name, LocalDate birthDate, String street, String postalCode, String town, boolean inactive, List<Licences> licencesList, LocalDate registrationDate) {
         List<Client> list = null;

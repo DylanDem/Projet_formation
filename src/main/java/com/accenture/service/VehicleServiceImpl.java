@@ -26,6 +26,12 @@ public class VehicleServiceImpl implements VehicleService {
     @Autowired
     MotorbikeDao motorbikeDao;
 
+
+    /**
+     * Retrieves a list of all vehicles.
+     *
+     * @return A list of all vehicles
+     */
     @Override
     public List<Object> findAllVehicles() {
         logger.info("Entering findAllVehicles method");
@@ -45,6 +51,15 @@ public class VehicleServiceImpl implements VehicleService {
         return vehicles;
     }
 
+
+    /**
+     * Searches for vehicles based on their active status and location.
+     *
+     * @param active Optional parameter to filter vehicles based on their active status
+     * @param outCarPark Optional parameter to filter vehicles based on their location being out of the car park
+     * @return A list of vehicles matching the search criteria
+     */
+    @Override
     public List<Vehicle> search(Boolean active, Boolean outCarPark) {
         logger.info("Entering the search method with active={} and outCarPark={}", active, outCarPark);
         List<Vehicle> vehicles = new ArrayList<>();
