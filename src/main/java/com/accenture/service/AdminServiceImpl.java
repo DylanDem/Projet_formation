@@ -1,6 +1,5 @@
 package com.accenture.service;
 
-import com.accenture.Application;
 import com.accenture.exception.AdminException;
 import com.accenture.exception.ClientException;
 import com.accenture.repository.AdminDao;
@@ -33,7 +32,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
 
-    private static void adminVerify(AdminRequestDto adminRequestDto) throws ClientException {
+    /**
+     * Verifies the validity of the provided AdminRequestDto.
+     *
+     * @param adminRequestDto The AdminRequestDto to verify
+     * @throws ClientException If the AdminRequestDto is invalid
+     */
+    private static void verifyAdmin(AdminRequestDto adminRequestDto) throws ClientException {
         if (adminRequestDto == null)
             throw new ClientException("AdminRequestDto is null");
         if (adminRequestDto.name() == null || adminRequestDto.name().isBlank())
@@ -49,6 +54,13 @@ public class AdminServiceImpl implements AdminService {
 
     }
 
+
+    /**
+     * Replaces the properties of the existing admin with those of the provided admin.
+     *
+     * @param admin The admin containing the new properties
+     * @param existingAdmin The existing admin to update
+     */
     private static void toReplaceAdmin(Admin admin, Admin existingAdmin) {
         if (admin.getName() != null)
             existingAdmin.setName(admin.getName());
@@ -62,6 +74,14 @@ public class AdminServiceImpl implements AdminService {
             existingAdmin.setFunction((admin.getFunction()));
     }
 
+
+    /**
+     * Retrieves a list of all admins.
+     *
+     * @param email The email of the admin
+     * @param password The password of the admin
+     * @return A list of AdminResponseDto objects
+     */
     @Override
     public List<AdminResponseDto> toFindAll(String email, String password) {
         return adminDao.findAll().stream()
@@ -69,6 +89,14 @@ public class AdminServiceImpl implements AdminService {
                 .toList();
     }
 
+
+    /**
+     * Retrieves an admin based on their email.
+     *
+     * @param email The email of the admin to retrieve
+     * @return The AdminResponseDto object containing the admin's information
+     * @throws EntityNotFoundException If the admin is not found
+     */
     @Override
     public AdminResponseDto toFindAdmin(String email) throws EntityNotFoundException {
         Optional<Admin> optAdmin = adminDao.findById(email);
@@ -77,9 +105,17 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.toAdminResponseDto(admin);
     }
 
+
+    /**
+     * Adds a new admin based on the provided AdminRequestDto.
+     *
+     * @param adminRequestDto The AdminRequestDto containing the new admin's information
+     * @return The AdminResponseDto object containing the added admin's information
+     * @throws ClientException If the AdminRequestDto is invalid
+     */
     @Override
     public AdminResponseDto toAddMin(AdminRequestDto adminRequestDto) throws ClientException {
-        adminVerify(adminRequestDto);
+        verifyAdmin(adminRequestDto);
         Admin admin = adminMapper.toAdmin(adminRequestDto);
         Admin backedAdmin = adminDao.save(admin);
 
@@ -88,11 +124,21 @@ public class AdminServiceImpl implements AdminService {
 
     }
 
+    /**
+     * Updates an existing admin based on their email, password, and the provided AdminRequestDto.
+     *
+     * @param email The email of the admin to update
+     * @param password The password of the admin to update
+     * @param adminRequestDto The AdminRequestDto containing the updated admin's information
+     * @return The AdminResponseDto object containing the updated admin's information
+     * @throws AdminException If there is an error updating the admin
+     * @throws EntityNotFoundException If the admin is not found
+     */
     public AdminResponseDto toUpdateAdmin(String email, String password, AdminRequestDto adminRequestDto) throws AdminException, EntityNotFoundException {
         if (!adminDao.existsById(email))
             throw new EntityNotFoundException(NULLABLE_ID);
 
-        adminVerify(adminRequestDto);
+        verifyAdmin(adminRequestDto);
 
         Admin admin = adminMapper.toAdmin(adminRequestDto);
         admin.setEmail(email);
@@ -101,6 +147,16 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.toAdminResponseDto(registrdAdmin);
     }
 
+
+    /**
+     * Partially updates an existing admin based on their email and the provided AdminRequestDto.
+     *
+     * @param email The email of the admin to partially update
+     * @param adminRequestDto The AdminRequestDto containing the updated admin's information
+     * @return The AdminResponseDto object containing the updated admin's information
+     * @throws AdminException If there is an error updating the admin
+     * @throws EntityNotFoundException If the admin is not found
+     */
     public AdminResponseDto toPartiallyUpdateAdmin(String email, AdminRequestDto adminRequestDto) throws AdminException, EntityNotFoundException {
         Optional<Admin> adminOptional = adminDao.findById(email);
         if (adminOptional.isEmpty())
@@ -115,6 +171,14 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.toAdminResponseDto(registrdAdmin);
     }
 
+
+    /**
+     * Deletes an admin based on their email and password.
+     *
+     * @param email The email of the admin to delete
+     * @param password The password of the admin to delete
+     * @throws EntityNotFoundException If the admin is not found
+     */
     @Override
     public void deleteAdmin(String email, String password) throws EntityNotFoundException {
         if (adminDao.existsById(email))
@@ -122,6 +186,17 @@ public class AdminServiceImpl implements AdminService {
 
     }
 
+
+    /**
+     * Searches for admins based on various criteria.
+     *
+     * @param email The email of the admin to search for
+     * @param firstName The first name of the admin to search for
+     * @param name The name of the admin to search for
+     * @param function The function of the admin to search for
+     * @return A list of AdminResponseDto objects matching the search criteria
+     * @throws AdminException If no valid search criteria are provided
+     */
     @Override
     public List<AdminResponseDto> searchAdmin(String email, String firstName, String name, String function) {
         List<Admin> list = null;

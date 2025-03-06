@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Entity
 @DiscriminatorValue("Location")
-public class Location {
+public class Rental {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class Location {
     private LocalDate endDate;
     private int travelledKilometers;
     private int totalAmountEuros;
-    private LocalDate validationDate;
+    private LocalDate validationDate = LocalDate.now();
     private String locationState;
 
 

@@ -2,9 +2,9 @@ package com.accenture.service;
 
 
 import com.accenture.exception.VehicleException;
-import com.accenture.repository.LocationDao;
+import com.accenture.repository.RentalDao;
 import com.accenture.repository.MotorbikeDao;
-import com.accenture.repository.entity.Location;
+import com.accenture.repository.entity.Rental;
 import com.accenture.repository.entity.Motorbike;
 import com.accenture.service.dto.MotorbikeRequestDto;
 import com.accenture.service.dto.MotorbikeResponseDto;
@@ -28,12 +28,12 @@ public class MotorbikeServiceImpl implements MotorbikeService {
     private static final String NULLABLE_ID = "Non present ID";
     private final MotorbikeDao motorbikeDao;
     private final MotorbikeMapper motorbikeMapper;
-    private final LocationDao locationDao;
+    private final RentalDao rentalDao;
 
-    public MotorbikeServiceImpl(MotorbikeDao motorbikeDao, MotorbikeMapper motorbikeMapper, LocationDao locationDao) {
+    public MotorbikeServiceImpl(MotorbikeDao motorbikeDao, MotorbikeMapper motorbikeMapper, RentalDao rentalDao) {
         this.motorbikeDao = motorbikeDao;
         this.motorbikeMapper = motorbikeMapper;
-        this.locationDao = locationDao;
+        this.rentalDao = rentalDao;
     }
 
 
@@ -175,8 +175,8 @@ public class MotorbikeServiceImpl implements MotorbikeService {
     @Override
     public void delete(int id) throws EntityNotFoundException {
         Motorbike motorbike = motorbikeDao.findById(id).orElseThrow(() -> new EntityNotFoundException("No car for this ID"));
-        List<Location> locationList = locationDao.findByVehicleId(motorbike.getId());
-        if (locationList.isEmpty()) {
+        List<Rental> rentalList = rentalDao.findByVehicleId(motorbike.getId());
+        if (rentalList.isEmpty()) {
             motorbikeDao.delete(motorbike);
             return;
         }

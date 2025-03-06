@@ -19,7 +19,7 @@
 	Maximum pool size: undefined/unknown
 2025-03-05 12:27:32 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 2025-03-05 12:27:32 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-05 12:27:33 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'locationController' defined in file [C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes\com\accenture\controller\LocationController.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'com.accenture.service.LocationService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2025-03-05 12:27:33 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'locationController' defined in file [C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes\com\accenture\controller\LocationController.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'com.accenture.service.RentalService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
 2025-03-05 12:27:33 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-03-05 12:27:33 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
 
@@ -32,12 +32,12 @@ APPLICATION FAILED TO START
 
 Description:
 
-Parameter 0 of constructor in com.accenture.controller.LocationController required a bean of type 'com.accenture.service.LocationService' that could not be found.
+Parameter 0 of constructor in com.accenture.controller.RentalController required a bean of type 'com.accenture.service.RentalService' that could not be found.
 
 
 Action:
 
-Consider defining a bean of type 'com.accenture.service.LocationService' in your configuration.
+Consider defining a bean of type 'com.accenture.service.RentalService' in your configuration.
 
 2025-03-05 12:32:17 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
 2025-03-05 12:32:17 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
@@ -825,9 +825,9 @@ Caused by: java.io.FileNotFoundException: class path resource [com/accenture/ser
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
 2025-03-05 15:05:53 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-05 15:05:53 [restartedMain] WARN  o.h.t.s.i.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "alter table if exists location alter column accessory set data type varchar(255)" via JDBC [ERROR: operator does not exist: character varying >= integer
+2025-03-05 15:05:53 [restartedMain] WARN  o.h.t.s.i.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "alter table if exists rental alter column accessory set data type varchar(255)" via JDBC [ERROR: operator does not exist: character varying >= integer
   Hint: No operator matches the given name and argument types. You might need to add explicit type casts.]
-org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "alter table if exists location alter column accessory set data type varchar(255)" via JDBC [ERROR: operator does not exist: character varying >= integer
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "alter table if exists rental alter column accessory set data type varchar(255)" via JDBC [ERROR: operator does not exist: character varying >= integer
   Hint: No operator matches the given name and argument types. You might need to add explicit type casts.]
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94)
 	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:576)
@@ -916,9 +916,9 @@ Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: ch
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
 2025-03-05 15:06:40 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-05 15:06:40 [restartedMain] WARN  o.h.t.s.i.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "alter table if exists location alter column accessory set data type varchar(255)" via JDBC [ERROR: operator does not exist: character varying >= integer
+2025-03-05 15:06:40 [restartedMain] WARN  o.h.t.s.i.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "alter table if exists rental alter column accessory set data type varchar(255)" via JDBC [ERROR: operator does not exist: character varying >= integer
   Hint: No operator matches the given name and argument types. You might need to add explicit type casts.]
-org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "alter table if exists location alter column accessory set data type varchar(255)" via JDBC [ERROR: operator does not exist: character varying >= integer
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "alter table if exists rental alter column accessory set data type varchar(255)" via JDBC [ERROR: operator does not exist: character varying >= integer
   Hint: No operator matches the given name and argument types. You might need to add explicit type casts.]
 	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94)
 	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.applySqlString(AbstractSchemaMigrator.java:576)
