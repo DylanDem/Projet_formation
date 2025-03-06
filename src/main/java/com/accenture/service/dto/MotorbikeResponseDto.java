@@ -17,7 +17,7 @@ public record MotorbikeResponseDto(
         TypesMotorbike typesMotorbike,
         String transmission,
         int cylinders,
-        String cylinderCapacity,
+        int cylinderCapacity,
         int weight,
         int kwPower,
         int seatHeight

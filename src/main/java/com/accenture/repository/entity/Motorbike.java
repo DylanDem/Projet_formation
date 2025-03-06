@@ -20,7 +20,7 @@ import java.util.List;
 public class Motorbike extends Vehicle {
 
     private int cylinders;
-    private String cylinderCapacity;
+    private int cylinderCapacity;
     private String transmission;
     private int weight;
     private int kwPower;

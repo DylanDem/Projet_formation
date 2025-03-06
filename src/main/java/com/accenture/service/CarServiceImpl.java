@@ -1,6 +1,8 @@
 package com.accenture.service;
 
 import com.accenture.exception.VehicleException;
+import com.accenture.model.Licences;
+import com.accenture.model.TypeVehicleEnum;
 import com.accenture.repository.CarDao;
 import com.accenture.repository.RentalDao;
 import com.accenture.repository.entity.Car;
@@ -53,6 +55,30 @@ public class CarServiceImpl implements CarService {
             throw new VehicleException("car's daily's location price is absent");
         if (carRequestDto.kilometers() == 0)
             throw new VehicleException("car's kilometer is absent");
+        if (carRequestDto.typeVehicleEnum().equals(TypeVehicleEnum.CAR)) {
+            throw new VehicleException("This vehicle can ONLY be a CAR");
+        }
+
+        checkLicences(carRequestDto);
+    }
+
+    private static void checkLicences(CarRequestDto carRequestDto) {
+        for (Licences licence : carRequestDto.licencesList()) {
+            switch (licence) {
+                case B:
+                    if (carRequestDto.placesNb() > 9) {
+                        throw new VehicleException("car's specifications do not match the B licence requirements");
+                    }
+                    break;
+                case D1:
+                    if (carRequestDto.placesNb() <= 9 || carRequestDto.placesNb() > 16) {
+                        throw new VehicleException("car's specifications do not match the D1 licence requirements");
+                    }
+                    break;
+                default:
+                    throw new VehicleException("Invalid licence type. Only B and D1 licences are permitted.");
+            }
+        }
     }
 
     private static void basicCarParameters(CarRequestDto carRequestDto) {

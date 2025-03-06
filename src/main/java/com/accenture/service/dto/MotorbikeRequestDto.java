@@ -10,7 +10,6 @@ import java.util.List;
 
 public record MotorbikeRequestDto(
 
-        @NotBlank(message = "vehicle's type's mandatory")
         TypeVehicleEnum typeVehicleEnum,
 
         @NotBlank(message = "Brand is mandatory")
@@ -28,7 +27,7 @@ public record MotorbikeRequestDto(
         @NotNull(message = "Cylinders are mandatory")
         int cylinders,
 
-        String cylinderCapacity,
+        int cylinderCapacity,
 
         @NotNull(message = "Weight is mandatory")
         int weight,
@@ -44,8 +43,6 @@ public record MotorbikeRequestDto(
         List<Licences> licencesList,
 
         int dailyLocationPrice,
-        int kilometers,
-        boolean active,
-        boolean outCarPark
+        int kilometers
 ) {
 }

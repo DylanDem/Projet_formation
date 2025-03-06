@@ -8,6 +8,7 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @NoArgsConstructor
 @Data

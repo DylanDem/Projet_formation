@@ -128,3 +128,73 @@
 2025-03-06 17:23:24 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
 2025-03-06 17:23:27 [restartedMain] INFO  com.accenture.Application - Started Application in 3.949 seconds (process running for 2916.797)
 2025-03-06 17:23:27 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-06 23:02:26 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 26412 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-06 23:02:26 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-06 23:02:26 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-06 23:02:37 [restartedMain] INFO  com.accenture.Application - Started Application in 11.864 seconds (process running for 14.845)
+2025-03-06 23:02:37 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-06 23:06:20 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 31740 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-06 23:06:20 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-06 23:06:20 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-06 23:06:29 [restartedMain] INFO  com.accenture.Application - Started Application in 9.401 seconds (process running for 10.513)
+2025-03-06 23:06:29 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-06 23:12:30 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 31740 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-06 23:12:30 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-06 23:12:30 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-06 23:12:34 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 31740 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-06 23:12:34 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-06 23:12:34 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-06 23:12:36 [restartedMain] INFO  com.accenture.Application - Started Application in 2.069 seconds (process running for 376.919)
+2025-03-06 23:12:36 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-06 23:12:47 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 31740 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-06 23:12:47 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-06 23:12:47 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-06 23:12:51 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 31740 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-06 23:12:51 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-06 23:12:51 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-06 23:12:55 [restartedMain] INFO  com.accenture.Application - Started Application in 3.82 seconds (process running for 395.866)
+2025-03-06 23:12:55 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-06 23:13:37 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 32992 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-06 23:13:37 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-06 23:13:37 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-06 23:13:46 [restartedMain] INFO  com.accenture.Application - Started Application in 9.651 seconds (process running for 10.864)
+2025-03-06 23:13:46 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-06 23:15:23 [http-nio-8080-exec-1] INFO  c.a.controller.RentalController - Entering the add method with email: clientsemail2@gmail.com
+2025-03-06 23:15:23 [http-nio-8080-exec-1] INFO  c.a.controller.RentalController - Rental added with vehicle ID: 4
+2025-03-06 23:19:33 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 32992 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-06 23:19:33 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-06 23:19:33 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-06 23:19:37 [restartedMain] INFO  com.accenture.Application - Started Application in 4.453 seconds (process running for 361.982)
+2025-03-06 23:19:37 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-06 23:19:39 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 32992 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-06 23:19:39 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-06 23:19:39 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-06 23:19:41 [restartedMain] INFO  com.accenture.Application - Started Application in 2.736 seconds (process running for 366.356)
+2025-03-06 23:19:41 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-06 23:19:46 [http-nio-8080-exec-1] INFO  c.a.controller.MotorbikeController - Entering the add method
+2025-03-06 23:20:45 [http-nio-8080-exec-2] INFO  c.a.controller.MotorbikeController - Entering the add method
+2025-03-06 23:21:40 [http-nio-8080-exec-4] INFO  c.a.controller.MotorbikeController - Entering the add method
+2025-03-06 23:21:40 [http-nio-8080-exec-4] INFO  c.a.controller.MotorbikeController - Motorbike added with ID: 5
+2025-03-06 23:22:21 [http-nio-8080-exec-6] INFO  c.a.service.MotorbikeServiceImpl - Gathering all motorbikes.
+2025-03-06 23:23:35 [http-nio-8080-exec-8] INFO  c.a.controller.MotorbikeController - Entering the add method
+2025-03-06 23:23:52 [http-nio-8080-exec-9] INFO  c.a.controller.MotorbikeController - Entering the add method
+2025-03-06 23:24:33 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 32992 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-06 23:24:33 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-06 23:24:33 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-06 23:24:47 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 32992 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-06 23:24:47 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-06 23:24:47 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-06 23:24:49 [restartedMain] INFO  com.accenture.Application - Started Application in 2.503 seconds (process running for 674.331)
+2025-03-06 23:24:49 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-06 23:27:02 [http-nio-8080-exec-1] INFO  c.a.controller.MotorbikeController - Entering the add method
+2025-03-06 23:27:13 [http-nio-8080-exec-8] INFO  c.a.service.MotorbikeServiceImpl - Gathering all motorbikes.
+2025-03-06 23:27:37 [http-nio-8080-exec-10] INFO  c.a.controller.MotorbikeController - Entering the del method with ID: 5
+2025-03-06 23:27:42 [http-nio-8080-exec-4] INFO  c.a.service.MotorbikeServiceImpl - Gathering all motorbikes.
+2025-03-06 23:28:03 [http-nio-8080-exec-6] INFO  c.a.controller.MotorbikeController - Entering the add method
+2025-03-06 23:28:09 [http-nio-8080-exec-7] INFO  c.a.controller.MotorbikeController - Entering the add method
+2025-03-06 23:28:15 [http-nio-8080-exec-1] INFO  c.a.controller.MotorbikeController - Entering the add method
+2025-03-06 23:28:15 [http-nio-8080-exec-1] INFO  c.a.controller.MotorbikeController - Motorbike added with ID: 6
+2025-03-06 23:29:21 [http-nio-8080-exec-3] INFO  c.a.controller.MotorbikeController - Entering the add method
+2025-03-06 23:29:21 [http-nio-8080-exec-3] INFO  c.a.controller.MotorbikeController - Motorbike added with ID: 7
+2025-03-06 23:29:25 [http-nio-8080-exec-8] INFO  c.a.service.MotorbikeServiceImpl - Gathering all motorbikes.
+2025-03-06 23:29:34 [http-nio-8080-exec-9] INFO  c.a.controller.MotorbikeController - Entering the del method with ID: 7

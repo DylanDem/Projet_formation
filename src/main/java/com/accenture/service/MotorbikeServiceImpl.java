@@ -2,6 +2,8 @@ package com.accenture.service;
 
 
 import com.accenture.exception.VehicleException;
+import com.accenture.model.Licences;
+import com.accenture.model.TypeVehicleEnum;
 import com.accenture.repository.RentalDao;
 import com.accenture.repository.MotorbikeDao;
 import com.accenture.repository.entity.Rental;
@@ -49,7 +51,7 @@ public class MotorbikeServiceImpl implements MotorbikeService {
             throw new VehicleException("motorbike's cylinders are insufficient");
         if (motorbikeRequestDto.licencesList() == null)
             throw new VehicleException("motorbike's licence is absent");
-        if (motorbikeRequestDto.cylinderCapacity() == null || motorbikeRequestDto.cylinderCapacity().isBlank())
+        if (motorbikeRequestDto.cylinderCapacity() == 0)
             throw new VehicleException("motorbike's cylinder's capacity is insufficient");
         if (motorbikeRequestDto.transmission() == null || motorbikeRequestDto.transmission().isBlank())
             throw new VehicleException("car's transmission is absent");
@@ -63,6 +65,34 @@ public class MotorbikeServiceImpl implements MotorbikeService {
             throw new VehicleException("car's daily's location price is absent");
         if (motorbikeRequestDto.kilometers() == 0)
             throw new VehicleException("car's kilometer is absent");
+        if (motorbikeRequestDto.typeVehicleEnum().equals(TypeVehicleEnum.CAR)) {
+            throw new VehicleException("This vehicle can ONLY be a MOTORBIKE");
+        }
+        checkLicences(motorbikeRequestDto);
+    }
+
+    private static void checkLicences(MotorbikeRequestDto motorbikeRequestDto) {
+        for (Licences licence : motorbikeRequestDto.licencesList()) {
+            switch (licence) {
+                case A1:
+                    if (motorbikeRequestDto.cylinderCapacity() > 125 || motorbikeRequestDto.kwPower() > 11) {
+                        throw new VehicleException("motorbike's specifications do not match the A1 licence requirements");
+                    }
+                    break;
+                case A2:
+                    if (motorbikeRequestDto.kwPower() > 35) {
+                        throw new VehicleException("motorbike's specifications do not match the A2 licence requirements");
+                    }
+                    break;
+                case A:
+                    if (motorbikeRequestDto.kwPower() <= 35) {
+                        throw new VehicleException("motorbike's specifications require a higher licence than A");
+                    }
+                    break;
+                default:
+                    throw new VehicleException("Invalid licence type. Only A1, A2, and A licences are permitted.");
+            }
+        }
     }
 
     private static void basicMotorbikeParameters(MotorbikeRequestDto motorbikeRequestDto) {

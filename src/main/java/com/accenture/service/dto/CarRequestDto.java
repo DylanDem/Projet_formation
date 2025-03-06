@@ -11,7 +11,6 @@ import java.util.List;
 
 public record CarRequestDto(
 
-        @NotBlank(message = "vehicle's type is mandatory")
         TypeVehicleEnum typeVehicleEnum,
 
         @NotBlank(message = "Brand is mandatory")
