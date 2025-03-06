@@ -12,7 +12,6 @@ public record RentalRequestDto(
     LocalDate endDate,
     int travelledKilometers,
     int totalAmountEuros,
-    LocalDate validationDate,
     String locationState)
 
 

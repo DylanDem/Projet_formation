@@ -1,0 +1,135 @@
+2025-03-05 12:27:24 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 29520 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 12:27:24 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 12:27:24 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 12:32:17 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 29144 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 12:32:17 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 12:32:17 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 12:32:25 [restartedMain] INFO  com.accenture.Application - Started Application in 8.342 seconds (process running for 9.241)
+2025-03-05 12:32:25 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 12:37:19 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 15120 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 12:37:19 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 12:37:19 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 12:37:28 [restartedMain] INFO  com.accenture.Application - Started Application in 9.11 seconds (process running for 11.199)
+2025-03-05 12:37:28 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 12:39:03 [http-nio-8080-exec-10] INFO  c.a.service.MotorbikeServiceImpl - Gathering all motorbikes.
+2025-03-05 12:44:55 [http-nio-8080-exec-4] INFO  c.a.service.VehicleServiceImpl - Entering findAllVehicles method
+2025-03-05 12:44:55 [http-nio-8080-exec-4] DEBUG c.a.service.VehicleServiceImpl - Fetching all cars from carDao
+2025-03-05 12:44:55 [http-nio-8080-exec-4] DEBUG c.a.service.VehicleServiceImpl - Fetching all motorbikes from motorbikeDao
+2025-03-05 12:44:55 [http-nio-8080-exec-4] INFO  c.a.service.VehicleServiceImpl - Exiting findAllVehicles method with 2 vehicles found
+2025-03-05 12:54:27 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 15120 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 12:54:27 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 12:54:27 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 12:54:30 [restartedMain] INFO  com.accenture.Application - Started Application in 2.534 seconds (process running for 1033.408)
+2025-03-05 12:54:30 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 12:54:38 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 15120 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 12:54:38 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 12:54:38 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 12:54:39 [restartedMain] INFO  com.accenture.Application - Started Application in 1.32 seconds (process running for 1042.437)
+2025-03-05 12:54:39 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 12:56:29 [http-nio-8080-exec-9] INFO  c.a.service.VehicleServiceImpl - Entering findAllVehicles method
+2025-03-05 12:56:29 [http-nio-8080-exec-9] DEBUG c.a.service.VehicleServiceImpl - Fetching all cars from carDao
+2025-03-05 12:56:29 [http-nio-8080-exec-9] DEBUG c.a.service.VehicleServiceImpl - Fetching all motorbikes from motorbikeDao
+2025-03-05 12:56:29 [http-nio-8080-exec-9] INFO  c.a.service.VehicleServiceImpl - Exiting findAllVehicles method with 2 vehicles found
+2025-03-05 13:57:12 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 37816 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 13:57:12 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 13:57:12 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 13:57:23 [restartedMain] INFO  com.accenture.Application - Started Application in 12.191 seconds (process running for 14.759)
+2025-03-05 13:57:23 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 13:57:34 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 37816 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 13:57:34 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 13:57:34 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 13:57:36 [restartedMain] INFO  com.accenture.Application - Started Application in 2.166 seconds (process running for 27.75)
+2025-03-05 13:57:36 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 13:57:38 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 37816 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 13:57:38 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 13:57:38 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 13:57:39 [restartedMain] INFO  com.accenture.Application - Started Application in 1.596 seconds (process running for 30.908)
+2025-03-05 13:57:39 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 13:59:41 [http-nio-8080-exec-5] INFO  c.a.service.VehicleServiceImpl - Entering findAllVehicles method
+2025-03-05 13:59:41 [http-nio-8080-exec-5] DEBUG c.a.service.VehicleServiceImpl - Fetching all cars from carDao
+2025-03-05 13:59:41 [http-nio-8080-exec-5] DEBUG c.a.service.VehicleServiceImpl - Fetching all motorbikes from motorbikeDao
+2025-03-05 13:59:41 [http-nio-8080-exec-5] INFO  c.a.service.VehicleServiceImpl - Exiting findAllVehicles method with 1 vehicles found
+2025-03-05 14:09:39 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 25960 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 14:09:39 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 14:09:39 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 14:09:48 [restartedMain] INFO  com.accenture.Application - Started Application in 9.26 seconds (process running for 10.124)
+2025-03-05 14:09:48 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 14:12:18 [http-nio-8080-exec-2] INFO  c.a.service.VehicleServiceImpl - Entering findAllVehicles method
+2025-03-05 14:12:18 [http-nio-8080-exec-2] DEBUG c.a.service.VehicleServiceImpl - Fetching all cars from carDao
+2025-03-05 14:12:18 [http-nio-8080-exec-2] DEBUG c.a.service.VehicleServiceImpl - Fetching all motorbikes from motorbikeDao
+2025-03-05 14:12:18 [http-nio-8080-exec-2] INFO  c.a.service.VehicleServiceImpl - Exiting findAllVehicles method with 2 vehicles found
+2025-03-05 14:15:58 [http-nio-8080-exec-3] INFO  c.a.service.VehicleServiceImpl - Entering findAllVehicles method
+2025-03-05 14:15:58 [http-nio-8080-exec-3] DEBUG c.a.service.VehicleServiceImpl - Fetching all cars from carDao
+2025-03-05 14:15:58 [http-nio-8080-exec-3] DEBUG c.a.service.VehicleServiceImpl - Fetching all motorbikes from motorbikeDao
+2025-03-05 14:15:58 [http-nio-8080-exec-3] INFO  c.a.service.VehicleServiceImpl - Exiting findAllVehicles method with 2 vehicles found
+2025-03-05 14:21:41 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 25960 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 14:21:41 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 14:21:41 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 14:21:42 [restartedMain] INFO  com.accenture.Application - Started Application in 1.697 seconds (process running for 724.088)
+2025-03-05 14:21:42 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 14:21:51 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 25960 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 14:21:51 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 14:21:51 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 14:21:52 [restartedMain] INFO  com.accenture.Application - Started Application in 1.172 seconds (process running for 733.991)
+2025-03-05 14:21:52 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 14:23:11 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 35964 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 14:23:11 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 14:23:11 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 14:23:19 [restartedMain] INFO  com.accenture.Application - Started Application in 8.612 seconds (process running for 9.527)
+2025-03-05 14:23:19 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 14:28:48 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 35964 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 14:28:48 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 14:28:48 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 14:28:50 [restartedMain] INFO  com.accenture.Application - Started Application in 1.881 seconds (process running for 340.801)
+2025-03-05 14:28:50 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 14:28:52 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 35964 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 14:28:52 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 14:28:52 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 14:28:53 [restartedMain] INFO  com.accenture.Application - Started Application in 1.413 seconds (process running for 343.738)
+2025-03-05 14:28:53 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 14:55:08 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 13284 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 14:55:08 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 14:55:08 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 14:55:18 [restartedMain] INFO  com.accenture.Application - Started Application in 10.843 seconds (process running for 12.488)
+2025-03-05 14:55:18 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 14:55:26 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 37768 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 14:55:26 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 14:55:26 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 14:55:34 [restartedMain] INFO  com.accenture.Application - Started Application in 8.837 seconds (process running for 10.074)
+2025-03-05 14:55:34 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 15:05:44 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 37768 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 15:05:44 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 15:05:44 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 15:05:47 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 37768 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 15:05:47 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 15:05:47 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 15:05:51 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 37768 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 15:05:51 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 15:05:51 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 15:05:55 [restartedMain] INFO  com.accenture.Application - Started Application in 4.121 seconds (process running for 630.689)
+2025-03-05 15:05:55 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 15:06:35 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 7648 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 15:06:35 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 15:06:35 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 15:06:43 [restartedMain] INFO  com.accenture.Application - Started Application in 8.468 seconds (process running for 9.297)
+2025-03-05 15:06:43 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 15:08:03 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 24052 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 15:08:03 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 15:08:03 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 15:08:09 [restartedMain] INFO  com.accenture.Application - Started Application in 6.702 seconds (process running for 7.457)
+2025-03-05 15:08:09 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 15:10:55 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 13480 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 15:10:55 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 15:10:55 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 15:11:01 [restartedMain] INFO  com.accenture.Application - Started Application in 6.783 seconds (process running for 7.589)
+2025-03-05 15:11:01 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 15:20:25 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 29080 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 15:20:25 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 15:20:25 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 15:20:31 [restartedMain] INFO  com.accenture.Application - Started Application in 7.098 seconds (process running for 7.952)
+2025-03-05 15:20:31 [restartedMain] INFO  com.accenture.Application - Application started
+2025-03-05 15:22:13 [restartedMain] INFO  com.accenture.Application - Starting Application using Java 23.0.2 with PID 18704 (C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation\target\classes started by dylan.demasse in C:\Users\dylan.demasse\Downloads\Projet\Projet intelliJ\Projet formation)
+2025-03-05 15:22:13 [restartedMain] DEBUG com.accenture.Application - Running with Spring Boot v3.4.2, Spring v6.2.2
+2025-03-05 15:22:13 [restartedMain] INFO  com.accenture.Application - No active profile set, falling back to 1 default profile: "default"
+2025-03-05 15:22:21 [restartedMain] INFO  com.accenture.Application - Started Application in 8.947 seconds (process running for 10.042)
+2025-03-05 15:22:21 [restartedMain] INFO  com.accenture.Application - Application started

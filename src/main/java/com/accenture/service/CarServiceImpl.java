@@ -9,8 +9,6 @@ import com.accenture.service.dto.CarRequestDto;
 import com.accenture.service.dto.CarResponseDto;
 import com.accenture.service.mapper.CarMapper;
 import jakarta.persistence.EntityNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +22,6 @@ import java.util.Optional;
 @Service
 public class CarServiceImpl implements CarService {
 
-    private static final Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
     private static final String NULLABLE_ID = "Non present ID";
     private final CarDao carDao;
     private final CarMapper carMapper;
@@ -37,14 +34,7 @@ public class CarServiceImpl implements CarService {
     }
 
     private static void carVerify(CarRequestDto carRequestDto) throws VehicleException {
-        if (carRequestDto == null)
-            throw new VehicleException("CarRequestDto is null");
-        if (carRequestDto.brand() == null || carRequestDto.brand().isBlank())
-            throw new VehicleException("car's brand is absent");
-        if (carRequestDto.model() == null || carRequestDto.model().isBlank())
-            throw new VehicleException("car's model is absent");
-        if (carRequestDto.color() == null || carRequestDto.color().isBlank())
-            throw new VehicleException("car's color is absent");
+        basicCarParameters(carRequestDto);
         if (carRequestDto.types() == null)
             throw new VehicleException("car's type is absent");
         if (carRequestDto.placesNb() < 2)
@@ -63,6 +53,17 @@ public class CarServiceImpl implements CarService {
             throw new VehicleException("car's daily's location price is absent");
         if (carRequestDto.kilometers() == 0)
             throw new VehicleException("car's kilometer is absent");
+    }
+
+    private static void basicCarParameters(CarRequestDto carRequestDto) {
+        if (carRequestDto == null)
+            throw new VehicleException("CarRequestDto is null");
+        if (carRequestDto.brand() == null || carRequestDto.brand().isBlank())
+            throw new VehicleException("car's brand is absent");
+        if (carRequestDto.model() == null || carRequestDto.model().isBlank())
+            throw new VehicleException("car's model is absent");
+        if (carRequestDto.color() == null || carRequestDto.color().isBlank())
+            throw new VehicleException("car's color is absent");
     }
 
     private static void toReplace(Car car, Car existingCar) {

@@ -20,7 +20,5 @@ public interface AdminService {
 
     AdminResponseDto toPartiallyUpdateAdmin(String email, AdminRequestDto adminRequestDto) throws AdminException, EntityNotFoundException;
 
-    List<AdminResponseDto> searchAdmin(String email, String firstName, String name, String function);
-
    void deleteAdmin(String email, String password) throws EntityNotFoundException;
 }

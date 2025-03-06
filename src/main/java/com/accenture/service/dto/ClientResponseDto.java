@@ -11,7 +11,7 @@ public record ClientResponseDto(
 
         String name,
         String firstName,
-        Address address,
+        AddressDto addressDto,
         String email,
         LocalDate birthDate,
         LocalDate registrationDate,

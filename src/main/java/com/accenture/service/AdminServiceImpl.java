@@ -7,9 +7,7 @@ import com.accenture.repository.entity.Admin;
 import com.accenture.service.dto.*;
 import com.accenture.service.mapper.AdminMapper;
 import jakarta.persistence.EntityNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,18 +15,17 @@ import java.util.Optional;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-
-    private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
     private static final String NULLABLE_ID = "Non present ID";
-    @Autowired
     private final AdminDao adminDao;
     private final AdminMapper adminMapper;
     private static final String REGEX_PW = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[&#@-_§])[A-Za-z\\d&%$_]{8,16}$";
+    private final PasswordEncoder passwordEncoder;
 
 
-    public AdminServiceImpl(AdminDao adminDao, AdminMapper adminMapper) {
+    public AdminServiceImpl(AdminDao adminDao, AdminMapper adminMapper, PasswordEncoder passwordEncoder) {
         this.adminDao = adminDao;
         this.adminMapper = adminMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -107,6 +104,8 @@ public class AdminServiceImpl implements AdminService {
     public AdminResponseDto toAddMin(AdminRequestDto adminRequestDto) throws ClientException {
         verifyAdmin(adminRequestDto);
         Admin admin = adminMapper.toAdmin(adminRequestDto);
+        String password = passwordEncoder.encode(admin.getPassword());
+        admin.setPassword(password);
         Admin backedAdmin = adminDao.save(admin);
 
 
@@ -156,7 +155,7 @@ public class AdminServiceImpl implements AdminService {
 
         Admin existingAdmin = adminMapper.toAdmin(adminRequestDto);
 
-        toReplaceAdmin((Admin) admin, (Admin) existingAdmin);
+        toReplaceAdmin(admin, existingAdmin);
         Admin registrdAdmin = adminDao.save(existingAdmin);
         return adminMapper.toAdminResponseDto(registrdAdmin);
     }
@@ -174,28 +173,5 @@ public class AdminServiceImpl implements AdminService {
         if (adminDao.existsById(email))
             adminDao.deleteById(email);
 
-    }
-
-
-    /**
-     * Searches for admins based on various criteria.
-     *
-     * @param email The email of the admin to search for
-     * @param firstName The first name of the admin to search for
-     * @param name The name of the admin to search for
-     * @param function The function of the admin to search for
-     * @return A list of AdminResponseDto objects matching the search criteria
-     * @throws AdminException If no valid search criteria are provided
-     */
-    @Override
-    public List<AdminResponseDto> searchAdmin(String email, String firstName, String name, String function) {
-        List<Admin> list = null;
-        Optional<Admin> opt;
-        if (email != null) opt = adminDao.findByEmailContaining(email);
-        else if (firstName != null) list = adminDao.findByFirstNameContaining(firstName);
-        else if (name != null) list = adminDao.findByNameContaining(name);
-        else if (function != null) list = adminDao.findByFunctionContaining(function);
-        if (list == null) throw new AdminException("Please enter something valid !");
-        return list.stream().map(adminMapper::toAdminResponseDto).toList();
     }
 }

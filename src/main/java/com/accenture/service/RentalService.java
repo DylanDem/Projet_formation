@@ -1,6 +1,6 @@
 package com.accenture.service;
 
-import com.accenture.exception.LocationException;
+import com.accenture.exception.RentalException;
 import com.accenture.service.dto.RentalRequestDto;
 import com.accenture.service.dto.RentalResponseDto;
 import jakarta.persistence.EntityNotFoundException;
@@ -13,5 +13,5 @@ public interface RentalService {
     List<RentalResponseDto> toFindAll();
     RentalResponseDto toFind(int id) throws EntityNotFoundException;
     void delete(int id) throws EntityNotFoundException;
-    RentalResponseDto toPartiallyUpdate(int id, RentalRequestDto rentalRequestDto) throws LocationException, EntityNotFoundException;
+    RentalResponseDto toPartiallyUpdate(int id, RentalRequestDto rentalRequestDto) throws RentalException, EntityNotFoundException;
 }

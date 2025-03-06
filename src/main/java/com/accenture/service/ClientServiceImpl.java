@@ -1,17 +1,13 @@
 package com.accenture.service;
 
-import com.accenture.Application;
 import com.accenture.exception.ClientException;
-import com.accenture.model.Licences;
 import com.accenture.repository.ClientDao;
 import com.accenture.repository.entity.Client;
 import com.accenture.service.dto.ClientRequestDto;
 import com.accenture.service.dto.ClientResponseDto;
 import com.accenture.service.mapper.ClientMapper;
 import jakarta.persistence.EntityNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,37 +18,39 @@ import java.util.Optional;
 @Service
 public class ClientServiceImpl implements ClientService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ClientServiceImpl.class);
     private static final String NULLABLE_ID = "Non present ID";
     private static final String REGEX_PW = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[&#@-_§])[A-Za-z\\d&%$_]{8,16}$";
-    @Autowired
     private final ClientDao clientDao;
     private final ClientMapper clientMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public ClientServiceImpl(ClientDao clientDao, ClientMapper clientMapper) {
+    public ClientServiceImpl(ClientDao clientDao, ClientMapper clientMapper, PasswordEncoder passwordEncoder) {
         this.clientDao = clientDao;
         this.clientMapper = clientMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    private static void clientVerify(ClientRequestDto clientRequestDto) throws ClientException {
+    private void clientVerify(ClientRequestDto clientRequestDto) throws ClientException {
         if (clientRequestDto == null)
             throw new ClientException("ClientRequestDto is null");
         if (clientRequestDto.name() == null || clientRequestDto.name().isBlank())
             throw new ClientException("Client's name is absent");
-        if (clientRequestDto.firstName() == null)
+        if (clientRequestDto.firstName() == null || clientRequestDto.firstName().isBlank())
             throw new ClientException("Client's first name is absent");
-        if (clientRequestDto.email() == null)
+        if (clientRequestDto.email() == null || clientRequestDto.email().isBlank())
             throw new ClientException("Client's email is absent");
+        if (clientDao.existsByEmail(clientRequestDto.email()))
+            throw new ClientException("Client's email already exists");
         if (clientRequestDto.birthDate() == null)
             throw new ClientException("Client's birth date is absent");
         if (!clientRequestDto.password().matches(REGEX_PW))
             throw new ClientException("Client's password is not valid");
         if (clientRequestDto.address().town() == null)
-            throw new ClientException("Client's address is absent");
+            throw new ClientException("Client's town is absent");
         if (clientRequestDto.address().street() == null)
-            throw new ClientException("Client's address is absent");
+            throw new ClientException("Client's street is absent");
         if (clientRequestDto.address().postalCode() == null)
-            throw new ClientException("Client's address is absent");
+            throw new ClientException("Client's postal code is absent");
         if (Period.between(clientRequestDto.birthDate(), LocalDate.now()).getYears() < 18)
             throw new ClientException("Client MUST be over 18 years old");
 
@@ -143,14 +141,11 @@ public class ClientServiceImpl implements ClientService {
     public ClientResponseDto toAdd(ClientRequestDto clientRequestDto) throws ClientException {
         clientVerify(clientRequestDto);
         Client client = clientMapper.toClient(clientRequestDto);
+        String password = passwordEncoder.encode(client.getPassword());
+        client.setPassword(password);
         Client backedClient = clientDao.save(client);
 
         return clientMapper.toClientResponseDto(backedClient);
-
-    }
-
-    @Override
-    public void saveClient(ClientRequestDto clientRequestDto) {
 
     }
 
@@ -198,7 +193,7 @@ public class ClientServiceImpl implements ClientService {
 
         Client client = clientMapper.toClient(clientRequestDto);
 
-        toReplace((Client) client, (Client) existingClient);
+        toReplace(client,existingClient);
         Client registrdClient = clientDao.save(existingClient);
         return clientMapper.toClientResponseDto(registrdClient);
     }
@@ -216,44 +211,6 @@ public class ClientServiceImpl implements ClientService {
         if (clientDao.existsById(email))
             clientDao.deleteById(email);
 
-    }
-
-
-    /**
-     * Searches for clients based on various criteria.
-     *
-     * @param email The email of the client to search for
-     * @param firstName The first name of the client to search for
-     * @param name The name of the client to search for
-     * @param birthDate The birth date of the client to search for
-     * @param street The street address of the client to search for
-     * @param postalCode The postal code of the client to search for
-     * @param town The town of the client to search for
-     * @param inactive The inactive status of the client to search for
-     * @param licencesList The list of licenses of the client to search for
-     * @param registrationDate The registration date of the client to search for
-     * @return A list of ClientResponseDto objects matching the search criteria
-     * @throws ClientException If no valid search criteria are provided
-     */
-    @Override
-    public List<ClientResponseDto> search(String email, String firstName, String name, LocalDate birthDate, String street, String postalCode, String town, boolean inactive, List<Licences> licencesList, LocalDate registrationDate) {
-        List<Client> list = null;
-        if (email != null) list = clientDao.findByEmailContaining(email);
-        else if (firstName != null) list = clientDao.findByFirstNameContaining(firstName);
-        else if (name != null) list = clientDao.findByNameContaining(name);
-        else if (birthDate != null) list = clientDao.findByBirthDate(birthDate);
-        else if (street != null) list = clientDao.findByAddress_StreetContaining(street);
-        else if (postalCode != null) list = clientDao.findByAddress_PostalCodeContaining(postalCode);
-        else if (town != null) list = clientDao.findByAddress_TownContaining(town);
-        else if (inactive != false) list = clientDao.findByInactive(inactive);
-        else if (registrationDate != null) list = clientDao.findByRegistrationDate(registrationDate);
-        else if (licencesList != null && !licencesList.isEmpty()) {
-            Licences licences = licencesList.get(0);
-            list = clientDao.findByLicencesListContaining(licences);
-
-        }
-        if (list == null) throw new ClientException("Please enter something valid !");
-        return list.stream().map(clientMapper::toClientResponseDto).toList();
     }
 
 

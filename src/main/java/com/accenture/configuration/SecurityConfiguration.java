@@ -1,4 +1,4 @@
-package com.accenture.security;
+package com.accenture.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,24 +29,14 @@ public class SecurityConfiguration {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html").permitAll()
                         .requestMatchers("/clients/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/clients/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/clients/**").permitAll()
-                        .requestMatchers(HttpMethod.PATCH, "/clients/**").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/clients/**").permitAll()
                         .requestMatchers("/admins/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/motorbikes/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/motorbikes/**").permitAll()
-                        .requestMatchers(HttpMethod.PATCH, "/motorbikes/**").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/motorbikes/**").hasAnyRole("ADMIN", "SUPERADMIN")
+                        .requestMatchers("/motorbikes/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/cars/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/cars/**").permitAll()
                         .requestMatchers(HttpMethod.PATCH, "/cars/**").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/cars/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/cars/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/vehicles/**").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/locations/**").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/locations/**").permitAll()
-                        .requestMatchers(HttpMethod.DELETE,"/locations/**").permitAll()
-                        .requestMatchers(HttpMethod.PATCH,"/locations/**").permitAll()
+                        .requestMatchers("/rentals/**").permitAll()
                         .anyRequest().authenticated());
         return http.build();
     }

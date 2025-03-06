@@ -1,6 +1,6 @@
 package com.accenture.service;
 
-import com.accenture.exception.LocationException;
+import com.accenture.exception.RentalException;
 import com.accenture.repository.ClientDao;
 import com.accenture.repository.RentalDao;
 import com.accenture.repository.VehicleDao;
@@ -11,8 +11,6 @@ import com.accenture.service.dto.RentalRequestDto;
 import com.accenture.service.dto.RentalResponseDto;
 import com.accenture.service.mapper.RentalMapper;
 import jakarta.persistence.EntityNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +19,6 @@ import java.util.Optional;
 @Service
 public class RentalServiceImpl implements RentalService {
 
-    private static final Logger logger = LoggerFactory.getLogger(RentalServiceImpl.class);
     private static final String NULLABLE_ID = "Non present ID";
     private final RentalDao rentalDao;
     private final RentalMapper rentalMapper;
@@ -35,27 +32,21 @@ public class RentalServiceImpl implements RentalService {
         this.vehicleDao = vehicleDao;
     }
 
-    private static void locationVerify(RentalRequestDto rentalRequestDto) throws LocationException {
+    private static void locationVerify(RentalRequestDto rentalRequestDto) throws RentalException {
         if (rentalRequestDto == null)
-            throw new LocationException("LocationRequestDto is null");
+            throw new RentalException("LocationRequestDto is null");
         if (rentalRequestDto.idVehicle() == 0)
-            throw new LocationException("Vehicle's absent");
+            throw new RentalException("Vehicle's absent");
         if (rentalRequestDto.locationState() == null || rentalRequestDto.locationState().isBlank())
-            throw new LocationException("location's state is absent");
+            throw new RentalException("location's state is absent");
         if (rentalRequestDto.startDate() == null)
-            throw new LocationException("start date's absent");
+            throw new RentalException("start date's absent");
         if (rentalRequestDto.endDate() == null)
-            throw new LocationException("end date's absent");
+            throw new RentalException("end date's absent");
         if (rentalRequestDto.endDate().isBefore(rentalRequestDto.startDate()))
-            throw new LocationException("end date cannot be before start date");
+            throw new RentalException("end date cannot be before start date");
         if (rentalRequestDto.totalAmountEuros() == 0)
-            throw new LocationException("Location's total amount is absent");
-        if (rentalRequestDto.validationDate() == null)
-            throw new LocationException("Validation date is absent");
-        if (rentalRequestDto.validationDate().isBefore(rentalRequestDto.startDate()) ||
-                rentalRequestDto.validationDate().isAfter(rentalRequestDto.endDate())) {
-            throw new LocationException("Validation date is out of range");
-        }
+            throw new RentalException("Location's total amount is absent");
     }
 
     private static void toReplace(Rental rental, Rental existingRental) {
@@ -82,10 +73,10 @@ public class RentalServiceImpl implements RentalService {
      * @param email The email of the client making the reservation
      * @param rentalRequestDto The RentalRequestDto containing the rental information
      * @return The RentalResponseDto object containing the saved rental information
-     * @throws LocationException If there is an error with the rental request
+     * @throws RentalException If there is an error with the rental request
      */
     @Override
-    public RentalResponseDto addReservation(String email, RentalRequestDto rentalRequestDto) throws LocationException {
+    public RentalResponseDto addReservation(String email, RentalRequestDto rentalRequestDto) throws RentalException {
         locationVerify(rentalRequestDto);
         Client client = clientDao.findById(email).orElseThrow(() -> new EntityNotFoundException("Client not found"));
         Rental rental = rentalMapper.toLocation(rentalRequestDto);
@@ -107,11 +98,11 @@ public class RentalServiceImpl implements RentalService {
      * @param id The ID of the rental to partially update
      * @param rentalRequestDto The RentalRequestDto containing the updated rental information
      * @return The RentalResponseDto object containing the updated rental information
-     * @throws LocationException If there is an error with the rental request
+     * @throws RentalException If there is an error with the rental request
      * @throws EntityNotFoundException If the rental is not found
      */
     @Override
-    public RentalResponseDto toPartiallyUpdate(int id, RentalRequestDto rentalRequestDto) throws LocationException, EntityNotFoundException {
+    public RentalResponseDto toPartiallyUpdate(int id, RentalRequestDto rentalRequestDto) throws RentalException, EntityNotFoundException {
         Optional<Rental> locationOptional = rentalDao.findById(id);
         if (locationOptional.isEmpty())
             throw new EntityNotFoundException(NULLABLE_ID);

@@ -3,14 +3,13 @@ package com.accenture.controller;
 import com.accenture.service.RentalService;
 import com.accenture.service.dto.RentalRequestDto;
 import com.accenture.service.dto.RentalResponseDto;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
