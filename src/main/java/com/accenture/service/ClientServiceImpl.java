@@ -1,17 +1,13 @@
 package com.accenture.service;
 
-import com.accenture.Application;
 import com.accenture.exception.ClientException;
-import com.accenture.model.Licences;
 import com.accenture.repository.ClientDao;
 import com.accenture.repository.entity.Client;
 import com.accenture.service.dto.ClientRequestDto;
 import com.accenture.service.dto.ClientResponseDto;
 import com.accenture.service.mapper.ClientMapper;
 import jakarta.persistence.EntityNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,37 +18,39 @@ import java.util.Optional;
 @Service
 public class ClientServiceImpl implements ClientService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ClientServiceImpl.class);
     private static final String NULLABLE_ID = "Non present ID";
     private static final String REGEX_PW = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[&#@-_§])[A-Za-z\\d&%$_]{8,16}$";
-    @Autowired
     private final ClientDao clientDao;
     private final ClientMapper clientMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public ClientServiceImpl(ClientDao clientDao, ClientMapper clientMapper) {
+    public ClientServiceImpl(ClientDao clientDao, ClientMapper clientMapper, PasswordEncoder passwordEncoder) {
         this.clientDao = clientDao;
         this.clientMapper = clientMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    private static void clientVerify(ClientRequestDto clientRequestDto) throws ClientException {
+    private void clientVerify(ClientRequestDto clientRequestDto) throws ClientException {
         if (clientRequestDto == null)
             throw new ClientException("ClientRequestDto is null");
         if (clientRequestDto.name() == null || clientRequestDto.name().isBlank())
             throw new ClientException("Client's name is absent");
-        if (clientRequestDto.firstName() == null)
+        if (clientRequestDto.firstName() == null || clientRequestDto.firstName().isBlank())
             throw new ClientException("Client's first name is absent");
-        if (clientRequestDto.email() == null)
+        if (clientRequestDto.email() == null || clientRequestDto.email().isBlank())
             throw new ClientException("Client's email is absent");
+        if (clientDao.existsByEmail(clientRequestDto.email()))
+            throw new ClientException("Client's email already exists");
         if (clientRequestDto.birthDate() == null)
             throw new ClientException("Client's birth date is absent");
         if (!clientRequestDto.password().matches(REGEX_PW))
             throw new ClientException("Client's password is not valid");
         if (clientRequestDto.address().town() == null)
-            throw new ClientException("Client's address is absent");
+            throw new ClientException("Client's town is absent");
         if (clientRequestDto.address().street() == null)
-            throw new ClientException("Client's address is absent");
+            throw new ClientException("Client's street is absent");
         if (clientRequestDto.address().postalCode() == null)
-            throw new ClientException("Client's address is absent");
+            throw new ClientException("Client's postal code is absent");
         if (Period.between(clientRequestDto.birthDate(), LocalDate.now()).getYears() < 18)
             throw new ClientException("Client MUST be over 18 years old");
 
@@ -75,6 +73,14 @@ public class ClientServiceImpl implements ClientService {
             existingClient.setAddress((client.getAddress()));
     }
 
+
+    /**
+     * Retrieves a client based on their email.
+     *
+     * @param email The email of the client to retrieve
+     * @return The ClientResponseDto object containing the client's information
+     * @throws EntityNotFoundException If the client is not found
+     */
     @Override
     public ClientResponseDto toFind(String email) throws EntityNotFoundException {
         Optional<Client> optClient = clientDao.findById(email);
@@ -84,6 +90,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
 
+
+    /**
+     * Retrieves a list of all clients.
+     *
+     * @return A list of ClientResponseDto objects
+     */
     @Override
     public List<ClientResponseDto> toFindAll() {
 
@@ -92,6 +104,16 @@ public class ClientServiceImpl implements ClientService {
                 .toList();
     }
 
+
+
+    /**
+     * Retrieves client information based on their email and password.
+     *
+     * @param email The email of the client to retrieve
+     * @param password The password of the client to retrieve
+     * @return The ClientResponseDto object containing the client's information
+     * @throws EntityNotFoundException If the credentials are invalid
+     */
     public ClientResponseDto getInfos (String email, String password) {
 
 
@@ -107,22 +129,37 @@ public class ClientServiceImpl implements ClientService {
 
     }
 
+
+    /**
+     * Adds a new client based on the provided ClientRequestDto.
+     *
+     * @param clientRequestDto The ClientRequestDto containing the new client's information
+     * @return The ClientResponseDto object containing the added client's information
+     * @throws ClientException If there is an error adding the client
+     */
     @Override
     public ClientResponseDto toAdd(ClientRequestDto clientRequestDto) throws ClientException {
         clientVerify(clientRequestDto);
         Client client = clientMapper.toClient(clientRequestDto);
+        String password = passwordEncoder.encode(client.getPassword());
+        client.setPassword(password);
         Client backedClient = clientDao.save(client);
 
         return clientMapper.toClientResponseDto(backedClient);
 
     }
 
-    @Override
-    public void saveClient(ClientRequestDto clientRequestDto) {
 
-    }
-
-
+    /**
+     * Updates an existing client based on their email, password, and the provided ClientRequestDto.
+     *
+     * @param email The email of the client to update
+     * @param password The password of the client to update
+     * @param clientRequestDto The ClientRequestDto containing the updated client's information
+     * @return The ClientResponseDto object containing the updated client's information
+     * @throws ClientException If there is an error updating the client
+     * @throws EntityNotFoundException If the client is not found
+     */
     @Override
     public ClientResponseDto toUpdate(String email, String password, ClientRequestDto clientRequestDto) throws ClientException, EntityNotFoundException {
         if (!clientDao.existsById(email))
@@ -137,6 +174,15 @@ public class ClientServiceImpl implements ClientService {
         return clientMapper.toClientResponseDto(registrdClient);
     }
 
+    /**
+     * Partially updates an existing client based on their email and the provided ClientRequestDto.
+     *
+     * @param email The email of the client to partially update
+     * @param clientRequestDto The ClientRequestDto containing the updated client's information
+     * @return The ClientResponseDto object containing the updated client's information
+     * @throws ClientException If there is an error updating the client
+     * @throws EntityNotFoundException If the client is not found
+     */
     @Override
     public ClientResponseDto toPartiallyUpdate(String email, ClientRequestDto clientRequestDto) throws ClientException, EntityNotFoundException {
         Optional<Client> clientOptional = clientDao.findById(email);
@@ -147,38 +193,24 @@ public class ClientServiceImpl implements ClientService {
 
         Client client = clientMapper.toClient(clientRequestDto);
 
-        toReplace((Client) client, (Client) existingClient);
+        toReplace(client,existingClient);
         Client registrdClient = clientDao.save(existingClient);
         return clientMapper.toClientResponseDto(registrdClient);
     }
 
 
+    /**
+     * Deletes a client based on their email and password.
+     *
+     * @param email The email of the client to delete
+     * @param password The password of the client to delete
+     * @throws EntityNotFoundException If the client is not found
+     */
     @Override
     public void delete(String email, String password) throws EntityNotFoundException {
         if (clientDao.existsById(email))
             clientDao.deleteById(email);
 
-    }
-
-    @Override
-    public List<ClientResponseDto> search(String email, String firstName, String name, LocalDate birthDate, String street, String postalCode, String town, boolean inactive, List<Licences> licencesList, LocalDate registrationDate) {
-        List<Client> list = null;
-        if (email != null) list = clientDao.findByEmailContaining(email);
-        else if (firstName != null) list = clientDao.findByFirstNameContaining(firstName);
-        else if (name != null) list = clientDao.findByNameContaining(name);
-        else if (birthDate != null) list = clientDao.findByBirthDate(birthDate);
-        else if (street != null) list = clientDao.findByAddress_StreetContaining(street);
-        else if (postalCode != null) list = clientDao.findByAddress_PostalCodeContaining(postalCode);
-        else if (town != null) list = clientDao.findByAddress_TownContaining(town);
-        else if (inactive != false) list = clientDao.findByInactive(inactive);
-        else if (registrationDate != null) list = clientDao.findByRegistrationDate(registrationDate);
-        else if (licencesList != null && !licencesList.isEmpty()) {
-            Licences licences = licencesList.get(0);
-            list = clientDao.findByLicencesListContaining(licences);
-
-        }
-        if (list == null) throw new ClientException("Please enter something valid !");
-        return list.stream().map(clientMapper::toClientResponseDto).toList();
     }
 
 

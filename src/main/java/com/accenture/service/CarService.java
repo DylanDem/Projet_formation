@@ -1,10 +1,8 @@
 package com.accenture.service;
 
 import com.accenture.exception.VehicleException;
-import com.accenture.repository.entity.Car;
 import com.accenture.service.dto.CarRequestDto;
 import com.accenture.service.dto.CarResponseDto;
-import com.accenture.service.dto.ClientResponseDto;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;

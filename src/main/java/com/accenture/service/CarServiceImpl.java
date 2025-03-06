@@ -1,17 +1,14 @@
 package com.accenture.service;
 
-import com.accenture.Application;
 import com.accenture.exception.VehicleException;
 import com.accenture.repository.CarDao;
-import com.accenture.repository.LocationDao;
+import com.accenture.repository.RentalDao;
 import com.accenture.repository.entity.Car;
-import com.accenture.repository.entity.Location;
+import com.accenture.repository.entity.Rental;
 import com.accenture.service.dto.CarRequestDto;
 import com.accenture.service.dto.CarResponseDto;
 import com.accenture.service.mapper.CarMapper;
 import jakarta.persistence.EntityNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,27 +22,19 @@ import java.util.Optional;
 @Service
 public class CarServiceImpl implements CarService {
 
-    private static final Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
     private static final String NULLABLE_ID = "Non present ID";
     private final CarDao carDao;
     private final CarMapper carMapper;
-    private final LocationDao locationDao;
+    private final RentalDao rentalDao;
 
-    public CarServiceImpl(CarDao carDao, CarMapper carMapper, LocationDao locationDao) {
+    public CarServiceImpl(CarDao carDao, CarMapper carMapper, RentalDao rentalDao) {
         this.carDao = carDao;
         this.carMapper = carMapper;
-        this.locationDao = locationDao;
+        this.rentalDao = rentalDao;
     }
 
     private static void carVerify(CarRequestDto carRequestDto) throws VehicleException {
-        if (carRequestDto == null)
-            throw new VehicleException("CarRequestDto is null");
-        if (carRequestDto.brand() == null || carRequestDto.brand().isBlank())
-            throw new VehicleException("car's brand is absent");
-        if (carRequestDto.model() == null || carRequestDto.model().isBlank())
-            throw new VehicleException("car's model is absent");
-        if (carRequestDto.color() == null || carRequestDto.color().isBlank())
-            throw new VehicleException("car's color is absent");
+        basicCarParameters(carRequestDto);
         if (carRequestDto.types() == null)
             throw new VehicleException("car's type is absent");
         if (carRequestDto.placesNb() < 2)
@@ -64,6 +53,17 @@ public class CarServiceImpl implements CarService {
             throw new VehicleException("car's daily's location price is absent");
         if (carRequestDto.kilometers() == 0)
             throw new VehicleException("car's kilometer is absent");
+    }
+
+    private static void basicCarParameters(CarRequestDto carRequestDto) {
+        if (carRequestDto == null)
+            throw new VehicleException("CarRequestDto is null");
+        if (carRequestDto.brand() == null || carRequestDto.brand().isBlank())
+            throw new VehicleException("car's brand is absent");
+        if (carRequestDto.model() == null || carRequestDto.model().isBlank())
+            throw new VehicleException("car's model is absent");
+        if (carRequestDto.color() == null || carRequestDto.color().isBlank())
+            throw new VehicleException("car's color is absent");
     }
 
     private static void toReplace(Car car, Car existingCar) {
@@ -151,11 +151,18 @@ public class CarServiceImpl implements CarService {
 
 
 
+    /**
+     * Deletes a car based on its ID.
+     * If the car is associated with any rentals, it will be marked as out of the car park instead of being deleted.
+     *
+     * @param id The ID of the car to delete
+     * @throws EntityNotFoundException If no car is found for the given ID
+     */
     @Override
     public void delete(int id) throws EntityNotFoundException {
         Car car = carDao.findById(id).orElseThrow(() -> new EntityNotFoundException("No car for this ID"));
-        List<Location> locationList = locationDao.findByVehicleId(car.getId());
-        if (locationList.isEmpty()) {
+        List<Rental> rentalList = rentalDao.findByVehicleId(car.getId());
+        if (rentalList.isEmpty()) {
             carDao.delete(car);
             return;
         }

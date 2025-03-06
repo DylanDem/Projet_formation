@@ -2,9 +2,9 @@ package com.accenture.service;
 
 
 import com.accenture.exception.VehicleException;
-import com.accenture.repository.LocationDao;
+import com.accenture.repository.RentalDao;
 import com.accenture.repository.MotorbikeDao;
-import com.accenture.repository.entity.Location;
+import com.accenture.repository.entity.Rental;
 import com.accenture.repository.entity.Motorbike;
 import com.accenture.service.dto.MotorbikeRequestDto;
 import com.accenture.service.dto.MotorbikeResponseDto;
@@ -28,12 +28,12 @@ public class MotorbikeServiceImpl implements MotorbikeService {
     private static final String NULLABLE_ID = "Non present ID";
     private final MotorbikeDao motorbikeDao;
     private final MotorbikeMapper motorbikeMapper;
-    private final LocationDao locationDao;
+    private final RentalDao rentalDao;
 
-    public MotorbikeServiceImpl(MotorbikeDao motorbikeDao, MotorbikeMapper motorbikeMapper, LocationDao locationDao) {
+    public MotorbikeServiceImpl(MotorbikeDao motorbikeDao, MotorbikeMapper motorbikeMapper, RentalDao rentalDao) {
         this.motorbikeDao = motorbikeDao;
         this.motorbikeMapper = motorbikeMapper;
-        this.locationDao = locationDao;
+        this.rentalDao = rentalDao;
     }
 
 
@@ -44,16 +44,7 @@ public class MotorbikeServiceImpl implements MotorbikeService {
      * @throws VehicleException if any required field is null or blank, or if any required field has an insufficient value
      */
     private static void toVerifyMotorbike(MotorbikeRequestDto motorbikeRequestDto) throws VehicleException {
-        if (motorbikeRequestDto == null)
-            throw new VehicleException("ClientRequestDto is null");
-        if (motorbikeRequestDto.brand() == null || motorbikeRequestDto.brand().isBlank())
-            throw new VehicleException("car's brand is absent");
-        if (motorbikeRequestDto.model() == null || motorbikeRequestDto.model().isBlank())
-            throw new VehicleException("car's model is absent");
-        if (motorbikeRequestDto.color() == null || motorbikeRequestDto.color().isBlank())
-            throw new VehicleException("car's color is absent");
-        if (motorbikeRequestDto.typesMotorbike() == null)
-            throw new VehicleException("car's type is absent");
+        basicMotorbikeParameters(motorbikeRequestDto);
         if (motorbikeRequestDto.cylinders() == 0)
             throw new VehicleException("motorbike's cylinders are insufficient");
         if (motorbikeRequestDto.licencesList() == null)
@@ -72,6 +63,19 @@ public class MotorbikeServiceImpl implements MotorbikeService {
             throw new VehicleException("car's daily's location price is absent");
         if (motorbikeRequestDto.kilometers() == 0)
             throw new VehicleException("car's kilometer is absent");
+    }
+
+    private static void basicMotorbikeParameters(MotorbikeRequestDto motorbikeRequestDto) {
+        if (motorbikeRequestDto == null)
+            throw new VehicleException("ClientRequestDto is null");
+        if (motorbikeRequestDto.brand() == null || motorbikeRequestDto.brand().isBlank())
+            throw new VehicleException("car's brand is absent");
+        if (motorbikeRequestDto.model() == null || motorbikeRequestDto.model().isBlank())
+            throw new VehicleException("car's model is absent");
+        if (motorbikeRequestDto.color() == null || motorbikeRequestDto.color().isBlank())
+            throw new VehicleException("car's color is absent");
+        if (motorbikeRequestDto.typesMotorbike() == null)
+            throw new VehicleException("car's type is absent");
     }
 
 
@@ -175,8 +179,8 @@ public class MotorbikeServiceImpl implements MotorbikeService {
     @Override
     public void delete(int id) throws EntityNotFoundException {
         Motorbike motorbike = motorbikeDao.findById(id).orElseThrow(() -> new EntityNotFoundException("No car for this ID"));
-        List<Location> locationList = locationDao.findByVehicleId(motorbike.getId());
-        if (locationList.isEmpty()) {
+        List<Rental> rentalList = rentalDao.findByVehicleId(motorbike.getId());
+        if (rentalList.isEmpty()) {
             motorbikeDao.delete(motorbike);
             return;
         }

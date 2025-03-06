@@ -7,12 +7,10 @@ import com.accenture.repository.entity.Motorbike;
 import com.accenture.repository.entity.Vehicle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class VehicleServiceImpl implements VehicleService {
@@ -20,12 +18,15 @@ public class VehicleServiceImpl implements VehicleService {
     private static final Logger logger = LoggerFactory.getLogger(VehicleServiceImpl.class);
 
 
-    @Autowired
     CarDao carDao;
-
-    @Autowired
     MotorbikeDao motorbikeDao;
 
+
+    /**
+     * Retrieves a list of all vehicles.
+     *
+     * @return A list of all vehicles
+     */
     @Override
     public List<Object> findAllVehicles() {
         logger.info("Entering findAllVehicles method");
@@ -45,6 +46,15 @@ public class VehicleServiceImpl implements VehicleService {
         return vehicles;
     }
 
+
+    /**
+     * Searches for vehicles based on their active status and location.
+     *
+     * @param active Optional parameter to filter vehicles based on their active status
+     * @param outCarPark Optional parameter to filter vehicles based on their location being out of the car park
+     * @return A list of vehicles matching the search criteria
+     */
+    @Override
     public List<Vehicle> search(Boolean active, Boolean outCarPark) {
         logger.info("Entering the search method with active={} and outCarPark={}", active, outCarPark);
         List<Vehicle> vehicles = new ArrayList<>();
@@ -64,7 +74,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     private <T extends Vehicle> List<T> filterVehicles(List<T> vehicles, Boolean active, Boolean outCarPark) {
         return vehicles.stream().filter(vehicle -> (active == null || vehicle.getActive().equals(active)) &&
-                (outCarPark == null || vehicle.getOutCarPark().equals(outCarPark))).collect(Collectors.toList());
+                (outCarPark == null || vehicle.getOutCarPark().equals(outCarPark))).toList();
     }
 
 

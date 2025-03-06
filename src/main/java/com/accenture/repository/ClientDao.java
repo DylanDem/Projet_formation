@@ -2,7 +2,6 @@ package com.accenture.repository;
 
 import com.accenture.model.Licences;
 import com.accenture.repository.entity.Client;
-import com.accenture.repository.entity.ConnectedUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;

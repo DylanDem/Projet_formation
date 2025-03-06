@@ -1,13 +1,10 @@
 package com.accenture.repository.entity;
 
 import com.accenture.model.TypeVehicleEnum;
-import com.accenture.model.Types;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.mapstruct.EnumMapping;
 
 @Data
 @Entity

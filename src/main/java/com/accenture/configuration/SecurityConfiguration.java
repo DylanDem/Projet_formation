@@ -1,4 +1,4 @@
-package com.accenture.security;
+package com.accenture.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,28 +29,14 @@ public class SecurityConfiguration {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html").permitAll()
                         .requestMatchers("/clients/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/clients/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/clients/**").permitAll()
-                        .requestMatchers(HttpMethod.PATCH, "/clients/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/clients/**").hasAnyRole("ADMIN", "SUPERADMIN")
                         .requestMatchers("/admins/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/admins/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/admins/**").permitAll()
-                        .requestMatchers(HttpMethod.PATCH, "/admins/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/admins/**").hasAnyRole("ADMIN", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.POST, "/motorbikes/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/motorbikes/**").permitAll()
-                        .requestMatchers(HttpMethod.PATCH, "/motorbikes/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/motorbikes/**").hasAnyRole("ADMIN", "SUPERADMIN")
+                        .requestMatchers("/motorbikes/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/cars/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/cars/**").permitAll()
-                        .requestMatchers(HttpMethod.PATCH, "/cars/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/cars/**").permitAll()
+                        .requestMatchers(HttpMethod.PATCH, "/cars/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/cars/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/vehicles/**").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/locations/**").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/locations/**").permitAll()
-                        .requestMatchers(HttpMethod.DELETE,"/locations/**").permitAll()
-                        .requestMatchers(HttpMethod.PATCH,"/locations/**").permitAll()
+                        .requestMatchers("/rentals/**").permitAll()
                         .anyRequest().authenticated());
         return http.build();
     }

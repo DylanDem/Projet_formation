@@ -16,15 +16,11 @@ public interface ClientService {
 
     ClientResponseDto toAdd(ClientRequestDto clientRequestDto) throws ClientException;
 
-    void saveClient(ClientRequestDto clientRequestDto);
-
     ClientResponseDto toUpdate(String email, String password, ClientRequestDto clientRequestDto) throws ClientException, EntityNotFoundException;
 
     ClientResponseDto toPartiallyUpdate(String email, ClientRequestDto clientRequestDto) throws ClientException, EntityNotFoundException;
 
     void delete(String email, String password) throws ClientException;
-
-    List<ClientResponseDto> search(String email, String firstName, String name, LocalDate birthDate, String street, String postalCode, String town, boolean inactive, List<Licences> licencesList, LocalDate registrationDate);
 
     ClientResponseDto getInfos (String email, String password);
 }
