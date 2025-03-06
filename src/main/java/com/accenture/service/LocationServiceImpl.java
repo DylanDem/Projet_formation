@@ -1,7 +1,6 @@
 package com.accenture.service;
 
 import com.accenture.exception.LocationException;
-import com.accenture.model.TypeVehicleEnum;
 import com.accenture.repository.ClientDao;
 import com.accenture.repository.LocationDao;
 import com.accenture.repository.VehicleDao;
@@ -17,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -133,14 +131,4 @@ public class LocationServiceImpl implements LocationService {
         return locationMapper.toLocationResponseDto(location);
     }
 
-    public List<Location> findByStartDate(LocalDate startDate) {
-        return locationDao.findByStartDate(startDate);
-    }
-
-    public List<Location> findByEndDate(LocalDate endDate) {
-        return locationDao.findByEndDate(endDate);
-    }
-
-
-  //TODO : recherche par dates de location, méthode doit renvoyer des véhicules
 }
