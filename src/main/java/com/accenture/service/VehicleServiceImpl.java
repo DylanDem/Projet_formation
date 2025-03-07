@@ -21,6 +21,10 @@ public class VehicleServiceImpl implements VehicleService {
     CarDao carDao;
     MotorbikeDao motorbikeDao;
 
+    public VehicleServiceImpl(CarDao carDao, MotorbikeDao motorbikeDao) {
+        this.carDao = carDao;
+        this.motorbikeDao = motorbikeDao;
+    }
 
     /**
      * Retrieves a list of all vehicles.

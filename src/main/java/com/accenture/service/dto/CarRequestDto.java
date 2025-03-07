@@ -42,7 +42,8 @@ public record CarRequestDto(
         boolean airConditioner,
 
         int dailyLocationPrice,
-        int kilometers
+        int kilometers,
+        Boolean active
 
 
 ) {

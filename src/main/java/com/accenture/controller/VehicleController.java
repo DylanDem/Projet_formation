@@ -18,8 +18,12 @@ import java.util.List;
 public class VehicleController {
 
     private VehicleService vehicleService;
+
     private static final Logger logger = LoggerFactory.getLogger(VehicleController.class);
 
+    public VehicleController(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
+    }
 
     /**
      * Retrieves a list of all vehicles.

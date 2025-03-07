@@ -6,6 +6,8 @@ import com.accenture.repository.entity.Vehicle;
 import java.time.LocalDate;
 
 public record RentalResponseDto(
+
+        int id,
         Client client,
         Vehicle vehicle,
         LocalDate startDate,

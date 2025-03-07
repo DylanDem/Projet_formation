@@ -15,7 +15,7 @@ public record ClientRequestDto(
         @NotBlank(message = "Name is mandatory")
         String firstName,
 
-        @NotBlank(message = "Address is mandatory")
+
         AddressDto address,
 
         @NotBlank(message = "Email is mandatory")

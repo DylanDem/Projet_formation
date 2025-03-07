@@ -55,7 +55,7 @@ public class CarServiceImpl implements CarService {
             throw new VehicleException("car's daily's location price is absent");
         if (carRequestDto.kilometers() == 0)
             throw new VehicleException("car's kilometer is absent");
-        if (carRequestDto.typeVehicleEnum().equals(TypeVehicleEnum.CAR)) {
+        if (carRequestDto.typeVehicleEnum().equals(TypeVehicleEnum.MOTORBIKE)) {
             throw new VehicleException("This vehicle can ONLY be a CAR");
         }
 

@@ -1,12 +1,12 @@
 package com.accenture.service;
 
 import com.accenture.exception.ClientException;
-import com.accenture.model.Licences;
+
 import com.accenture.service.dto.ClientRequestDto;
 import com.accenture.service.dto.ClientResponseDto;
 import jakarta.persistence.EntityNotFoundException;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 public interface ClientService {
